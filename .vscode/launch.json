@@ -1,0 +1,41 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Delta Pulse Web Server",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "http.server",
+      "args": ["8080", "--directory", "delta-pulse/web"],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Pipeline: 00 Coverage Check",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/delta-pulse/pipeline/00_coverage.py",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Pipeline: 03 Water Pulse",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/delta-pulse/pipeline/03_water.py",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Pipeline: 04 Paddy Rhythm",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/delta-pulse/pipeline/04_paddy.py",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Pipeline: 07 Export Web",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/delta-pulse/pipeline/07_export_web.py",
+      "console": "integratedTerminal"
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "jamuna": {
+    "aoi_name": "Brahmaputra-Jamuna Floodplain & Char Lands",
+    "sentinel1_comparison": {
+      "nisar_date": "2026-07-24",
+      "sentinel1_date": "2026-07-25",
+      "time_gap_days": 1,
+      "sentinel1_collection": "Sentinel-1 C-Band RTC (GAMMA0)",
+      "sentinel1_bursts_mosaicked": 1,
+      "sentinel1_granules": [
+        "S1D_IW_GRDH_1SDV_20260725T120409_20260725T120434_003830_006E63_rtc"
+      ],
+      "s1_threshold_vh_db": -17.52,
+      "nisar_open_water_km2": 392.47,
+      "s1_open_water_km2": 340.05,
+      "nisar_flooded_veg_km2": 4.32,
+      "open_water_metrics": {
+        "valid_pixels_compared": 262144,
+        "true_positives": 46992,
+        "false_positives": 14332,
+        "false_negatives": 6141,
+        "true_negatives": 194679,
+        "iou": 0.6965,
+        "cohens_kappa": 0.7715,
+        "precision": 0.7663,
+        "recall": 0.8844,
+        "f1_score": 0.8211,
+        "overall_accuracy": 0.9219
+      },
+      "total_inundation_metrics": {
+        "valid_pixels_compared": 262144,
+        "true_positives": 47011,
+        "false_positives": 14988,
+        "false_negatives": 6122,
+        "true_negatives": 194023,
+        "iou": 0.6901,
+        "cohens_kappa": 0.7654,
+        "precision": 0.7583,
+        "recall": 0.8848,
+        "f1_score": 0.8166,
+        "overall_accuracy": 0.9195
+      }
+    },
+    "sentinel2_optical_comparison": {
+      "nisar_date": "2026-11-09",
+      "sentinel2_date": "2026-11-09",
+      "time_gap_days": 0,
+      "sentinel2_collection": "Copernicus Sentinel-2 L2A (Surface Reflectance)",
+      "sentinel2_scenes": [
+        "S2B_MSIL2A_20261109T044009_R033_T45RYH_20261109T082003"
+      ],
+      "nisar_open_water_km2": 200.64,
+      "s2_optical_water_km2": 132.77,
+      "optical_agreement_metrics": {
+        "valid_pixels_compared": 262144,
+        "true_positives": 12676,
+        "false_positives": 18674,
+        "false_negatives": 8070,
+        "true_negatives": 222724,
+        "iou": 0.3216,
+        "cohens_kappa": 0.4326,
+        "precision": 0.4043,
+        "recall": 0.611,
+        "f1_score": 0.4866,
+        "overall_accuracy": 0.898
+      }
+    },
+    "known_limitations_and_physics": {
+      "wind_roughened_water": "Sentinel-1 C-band (5.6 cm wavelength) experiences Bragg resonant scattering over wind-rippled river reaches and wide haor fetches during monsoon squalls, raising VV/VH backscatter and causing missed water pixels. NISAR L-band (24 cm wavelength) is less sensitive to capillary ripples.",
+      "flooded_vegetation_double_bounce": "L-band 24 cm microwaves penetrate rice and wetland reed canopies to form a trunk/stalk-water dihedral corner reflector (+2.5 to +7 dB HH rise), whereas C-band 5.6 cm scatters primarily in upper foliage.",
+      "urban_and_shadow_confusion": "Smooth asphalt roads, airstrips, and dry flat sandbars (chars) can exhibit low specular backscatter similar to open water; combining JRC permanent water masks and dual-pol thresholds mitigates false positives.",
+      "data_maturity": "NISAR scenes are calibrated PROVISIONAL products (CRID P05023/P05036) from June 18 to Nov 9, 2026, posted at 80 m (Frequency B) / 10 m (Frequency A) with a 3x3 Lee speckle filter."
+    }
+  },
+  "haor": {
+    "aoi_name": "Sunamganj & Sylhet Haor Basin Wetlands",
+    "sentinel1_comparison": {
+      "nisar_date": "2026-07-24",
+      "sentinel1_date": "2026-07-25",
+      "time_gap_days": 1,
+      "sentinel1_collection": "Sentinel-1 C-Band RTC (GAMMA0)",
+      "sentinel1_bursts_mosaicked": 2,
+      "sentinel1_granules": [
+        "S1D_IW_GRDH_1SDV_20260725T120409_20260725T120434_003830_006E63_rtc",
+        "S1D_IW_GRDH_1SDV_20260722T234655_20260722T234720_003793_006D1F_rtc"
+      ],
+      "s1_threshold_vh_db": -21.09,
+      "nisar_open_water_km2": 1179.97,
+      "s1_open_water_km2": 1065.42,
+      "nisar_flooded_veg_km2": 0.58,
+      "open_water_metrics": {
+        "valid_pixels_compared": 262144,
+        "true_positives": 161313,
+        "false_positives": 23057,
+        "false_negatives": 5159,
+        "true_negatives": 72615,
+        "iou": 0.8511,
+        "cohens_kappa": 0.7582,
+        "precision": 0.8749,
+        "recall": 0.969,
+        "f1_score": 0.9196,
+        "overall_accuracy": 0.8924
+      },
+      "total_inundation_metrics": {
+        "valid_pixels_compared": 262144,
+        "true_positives": 161314,
+        "false_positives": 23146,
+        "false_negatives": 5158,
+        "true_negatives": 72526,
+        "iou": 0.8507,
+        "cohens_kappa": 0.7574,
+        "precision": 0.8745,
+        "recall": 0.969,
+        "f1_score": 0.9193,
+        "overall_accuracy": 0.892
+      }
+    },
+    "sentinel2_optical_comparison": {
+      "nisar_date": "2026-11-09",
+      "sentinel2_date": "2026-11-13",
+      "time_gap_days": 4,
+      "sentinel2_collection": "Copernicus Sentinel-2 L2A (Surface Reflectance)",
+      "sentinel2_scenes": [
+        "S2C_46RBN_20261111_0_L2A",
+        "S2B_46RBN_20261106_0_L2A",
+        "S2A_46RBN_20261113_0_L2A",
+        "S2A_46RCN_20261113_1_L2A"
+      ],
+      "nisar_open_water_km2": 877.22,
+      "s2_optical_water_km2": 692.24,
+      "optical_agreement_metrics": {
+        "valid_pixels_compared": 262144,
+        "true_positives": 100075,
+        "false_positives": 36991,
+        "false_negatives": 8087,
+        "true_negatives": 116991,
+        "iou": 0.6894,
+        "cohens_kappa": 0.6588,
+        "precision": 0.7301,
+        "recall": 0.9252,
+        "f1_score": 0.8162,
+        "overall_accuracy": 0.828
+      }
+    },
+    "known_limitations_and_physics": {
+      "wind_roughened_water": "Sentinel-1 C-band (5.6 cm wavelength) experiences Bragg resonant scattering over wind-rippled river reaches and wide haor fetches during monsoon squalls, raising VV/VH backscatter and causing missed water pixels. NISAR L-band (24 cm wavelength) is less sensitive to capillary ripples.",
+      "flooded_vegetation_double_bounce": "L-band 24 cm microwaves penetrate rice and wetland reed canopies to form a trunk/stalk-water dihedral corner reflector (+2.5 to +7 dB HH rise), whereas C-band 5.6 cm scatters primarily in upper foliage.",
+      "urban_and_shadow_confusion": "Smooth asphalt roads, airstrips, and dry flat sandbars (chars) can exhibit low specular backscatter similar to open water; combining JRC permanent water masks and dual-pol thresholds mitigates false positives.",
+      "data_maturity": "NISAR scenes are calibrated PROVISIONAL products (CRID P05023/P05036) from June 18 to Nov 9, 2026, posted at 80 m (Frequency B) / 10 m (Frequency A) with a 3x3 Lee speckle filter."
+    }
+  }
+}

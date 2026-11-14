@@ -1,0 +1,25 @@
+name: delta-pulse
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - asf_search
+  - earthaccess
+  - fsspec
+  - aiohttp
+  - requests
+  - h5py
+  - xarray
+  - h5netcdf
+  - zarr
+  - rasterio
+  - rioxarray
+  - numpy
+  - scipy
+  - scikit-image
+  - scikit-learn
+  - geopandas
+  - pyproj
+  - matplotlib
+  - pillow
+  - python-dotenv

@@ -1,0 +1,31 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start Delta Pulse Web App",
+      "type": "shell",
+      "command": ".\\.venv\\Scripts\\python.exe -m http.server 8080 --directory delta-pulse/web",
+      "problemMatcher": [],
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Run Full Data Pipeline (Stages 0-7)",
+      "type": "shell",
+      "command": ".\\.venv\\Scripts\\python.exe delta-pulse/pipeline/00_coverage.py; .\\.venv\\Scripts\\python.exe delta-pulse/pipeline/02_preprocess.py; .\\.venv\\Scripts\\python.exe delta-pulse/pipeline/03_water.py; .\\.venv\\Scripts\\python.exe delta-pulse/pipeline/04_paddy.py; .\\.venv\\Scripts\\python.exe delta-pulse/pipeline/05_impact.py; .\\.venv\\Scripts\\python.exe delta-pulse/pipeline/06_validate.py; .\\.venv\\Scripts\\python.exe delta-pulse/pipeline/07_export_web.py",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    }
+  ]
+}

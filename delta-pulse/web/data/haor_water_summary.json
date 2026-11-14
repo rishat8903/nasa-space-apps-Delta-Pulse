@@ -1,0 +1,159 @@
+{
+  "aoi_id": "haor",
+  "aoi_name": "Sunamganj & Sylhet Haor Basin Wetlands",
+  "dates": [
+    "2026-06-18",
+    "2026-06-30",
+    "2026-07-12",
+    "2026-07-24",
+    "2026-08-17",
+    "2026-08-29",
+    "2026-09-10",
+    "2026-09-22",
+    "2026-10-04",
+    "2026-10-16",
+    "2026-10-28",
+    "2026-11-09"
+  ],
+  "peak_flood_date": "2026-07-24",
+  "peak_water_km2": 1179.97,
+  "peak_new_flood_km2": 201.75,
+  "total_aoi_area_km2": 1677.72,
+  "permanent_water_km2": 1006.64,
+  "jrc_permanent_water_km2": 730.34,
+  "time_series": [
+    {
+      "date": "2026-06-18",
+      "total_water_km2": 1158.59,
+      "permanent_wet_km2": 977.97,
+      "new_flood_km2": 180.61,
+      "receding_km2": 28.67,
+      "flooded_veg_km2": 0.79,
+      "total_inundated_with_veg_km2": 1159.38,
+      "otsu_raw_hv_db": -19.68,
+      "threshold_hv_db": -19.68
+    },
+    {
+      "date": "2026-06-30",
+      "total_water_km2": 1175.4,
+      "permanent_wet_km2": 978.62,
+      "new_flood_km2": 196.78,
+      "receding_km2": 46.18,
+      "flooded_veg_km2": 0.22,
+      "total_inundated_with_veg_km2": 1175.62,
+      "otsu_raw_hv_db": -19.61,
+      "threshold_hv_db": -19.61
+    },
+    {
+      "date": "2026-07-12",
+      "total_water_km2": 1115.06,
+      "permanent_wet_km2": 924.7,
+      "new_flood_km2": 190.36,
+      "receding_km2": 126.47,
+      "flooded_veg_km2": 13.57,
+      "total_inundated_with_veg_km2": 1128.63,
+      "otsu_raw_hv_db": -19.47,
+      "threshold_hv_db": -19.47
+    },
+    {
+      "date": "2026-07-24",
+      "total_water_km2": 1179.97,
+      "permanent_wet_km2": 978.21,
+      "new_flood_km2": 201.75,
+      "receding_km2": 71.65,
+      "flooded_veg_km2": 0.58,
+      "total_inundated_with_veg_km2": 1180.55,
+      "otsu_raw_hv_db": -19.82,
+      "threshold_hv_db": -19.82
+    },
+    {
+      "date": "2026-08-17",
+      "total_water_km2": 1102.78,
+      "permanent_wet_km2": 966.21,
+      "new_flood_km2": 136.57,
+      "receding_km2": 150.34,
+      "flooded_veg_km2": 4.81,
+      "total_inundated_with_veg_km2": 1107.59,
+      "otsu_raw_hv_db": -19.34,
+      "threshold_hv_db": -19.34
+    },
+    {
+      "date": "2026-08-29",
+      "total_water_km2": 1102.43,
+      "permanent_wet_km2": 970.38,
+      "new_flood_km2": 132.04,
+      "receding_km2": 152.33,
+      "flooded_veg_km2": 10.69,
+      "total_inundated_with_veg_km2": 1113.12,
+      "otsu_raw_hv_db": -19.64,
+      "threshold_hv_db": -19.64
+    },
+    {
+      "date": "2026-09-10",
+      "total_water_km2": 1072.75,
+      "permanent_wet_km2": 967.17,
+      "new_flood_km2": 105.57,
+      "receding_km2": 182.38,
+      "flooded_veg_km2": 33.57,
+      "total_inundated_with_veg_km2": 1106.32,
+      "otsu_raw_hv_db": -19.88,
+      "threshold_hv_db": -19.88
+    },
+    {
+      "date": "2026-09-22",
+      "total_water_km2": 1047.9,
+      "permanent_wet_km2": 963.78,
+      "new_flood_km2": 84.12,
+      "receding_km2": 207.37,
+      "flooded_veg_km2": 80.95,
+      "total_inundated_with_veg_km2": 1128.85,
+      "otsu_raw_hv_db": -19.46,
+      "threshold_hv_db": -19.46
+    },
+    {
+      "date": "2026-10-04",
+      "total_water_km2": 1004.14,
+      "permanent_wet_km2": 959.51,
+      "new_flood_km2": 44.63,
+      "receding_km2": 251.19,
+      "flooded_veg_km2": 127.84,
+      "total_inundated_with_veg_km2": 1131.98,
+      "otsu_raw_hv_db": -19.85,
+      "threshold_hv_db": -19.85
+    },
+    {
+      "date": "2026-10-16",
+      "total_water_km2": 961.08,
+      "permanent_wet_km2": 949.41,
+      "new_flood_km2": 11.67,
+      "receding_km2": 294.46,
+      "flooded_veg_km2": 154.23,
+      "total_inundated_with_veg_km2": 1115.31,
+      "otsu_raw_hv_db": -19.8,
+      "threshold_hv_db": -19.8
+    },
+    {
+      "date": "2026-10-28",
+      "total_water_km2": 900.45,
+      "permanent_wet_km2": 895.45,
+      "new_flood_km2": 5.0,
+      "receding_km2": 355.21,
+      "flooded_veg_km2": 120.64,
+      "total_inundated_with_veg_km2": 1021.09,
+      "otsu_raw_hv_db": -18.8,
+      "threshold_hv_db": -18.8
+    },
+    {
+      "date": "2026-11-09",
+      "total_water_km2": 877.22,
+      "permanent_wet_km2": 869.56,
+      "new_flood_km2": 7.66,
+      "receding_km2": 378.57,
+      "flooded_veg_km2": 80.03,
+      "total_inundated_with_veg_km2": 957.25,
+      "otsu_raw_hv_db": -18.82,
+      "threshold_hv_db": -18.82
+    }
+  ],
+  "jamuna_transects": []
+}

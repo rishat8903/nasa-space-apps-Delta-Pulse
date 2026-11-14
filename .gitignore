@@ -1,0 +1,42 @@
+# ===================================================================
+# DELTA PULSE — GIT IGNORE CONFIGURATION
+# ===================================================================
+
+# Credentials and secrets (NEVER COMMIT)
+.env
+delta-pulse/.env
+.netrc
+_netrc
+
+# Python virtual environment and bytecode cache
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Large satellite datasets and raw NetCDF/GeoTIFF/HDF5 files
+# (Can be fetched / reproduced via delta-pulse/pipeline/01b_fetch_ancillary.py)
+datasets/
+delta-pulse/datasets/
+data_raw/
+delta-pulse/data_raw/
+*.nc
+*.h5
+*.hdf5
+*.zarr/
+
+# Keep web assets (images, overlays, QA figures, JSON summaries) tracked
+# but ignore standalone large GIS source files if placed outside web/
+*.tif
+*.tiff
+*.geojson
+!delta-pulse/web/**
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+delta-pulse/.vscode/

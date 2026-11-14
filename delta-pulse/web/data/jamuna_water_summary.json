@@ -1,0 +1,211 @@
+{
+  "aoi_id": "jamuna",
+  "aoi_name": "Brahmaputra-Jamuna Floodplain & Char Lands",
+  "dates": [
+    "2026-06-18",
+    "2026-06-30",
+    "2026-07-12",
+    "2026-07-24",
+    "2026-08-17",
+    "2026-08-29",
+    "2026-09-10",
+    "2026-09-22",
+    "2026-10-04",
+    "2026-10-16",
+    "2026-10-28",
+    "2026-11-09"
+  ],
+  "peak_flood_date": "2026-07-24",
+  "peak_water_km2": 392.47,
+  "peak_new_flood_km2": 157.51,
+  "total_aoi_area_km2": 1677.72,
+  "permanent_water_km2": 258.86,
+  "jrc_permanent_water_km2": 165.06,
+  "time_series": [
+    {
+      "date": "2026-06-18",
+      "total_water_km2": 200.68,
+      "permanent_wet_km2": 181.73,
+      "new_flood_km2": 18.94,
+      "receding_km2": 77.13,
+      "flooded_veg_km2": 21.73,
+      "total_inundated_with_veg_km2": 222.41,
+      "otsu_raw_hv_db": -15.16,
+      "threshold_hv_db": -16.5
+    },
+    {
+      "date": "2026-06-30",
+      "total_water_km2": 295.29,
+      "permanent_wet_km2": 221.94,
+      "new_flood_km2": 73.35,
+      "receding_km2": 40.26,
+      "flooded_veg_km2": 10.32,
+      "total_inundated_with_veg_km2": 305.61,
+      "otsu_raw_hv_db": -16.02,
+      "threshold_hv_db": -16.5
+    },
+    {
+      "date": "2026-07-12",
+      "total_water_km2": 209.73,
+      "permanent_wet_km2": 183.39,
+      "new_flood_km2": 26.34,
+      "receding_km2": 137.2,
+      "flooded_veg_km2": 16.76,
+      "total_inundated_with_veg_km2": 226.49,
+      "otsu_raw_hv_db": -15.54,
+      "threshold_hv_db": -16.5
+    },
+    {
+      "date": "2026-07-24",
+      "total_water_km2": 392.47,
+      "permanent_wet_km2": 234.96,
+      "new_flood_km2": 157.51,
+      "receding_km2": 37.79,
+      "flooded_veg_km2": 4.32,
+      "total_inundated_with_veg_km2": 396.79,
+      "otsu_raw_hv_db": -16.25,
+      "threshold_hv_db": -16.5
+    },
+    {
+      "date": "2026-08-17",
+      "total_water_km2": 245.41,
+      "permanent_wet_km2": 185.52,
+      "new_flood_km2": 59.9,
+      "receding_km2": 210.94,
+      "flooded_veg_km2": 3.78,
+      "total_inundated_with_veg_km2": 249.19,
+      "otsu_raw_hv_db": -15.33,
+      "threshold_hv_db": -16.5
+    },
+    {
+      "date": "2026-08-29",
+      "total_water_km2": 271.26,
+      "permanent_wet_km2": 195.51,
+      "new_flood_km2": 75.75,
+      "receding_km2": 201.71,
+      "flooded_veg_km2": 8.44,
+      "total_inundated_with_veg_km2": 279.7,
+      "otsu_raw_hv_db": -15.64,
+      "threshold_hv_db": -16.5
+    },
+    {
+      "date": "2026-09-10",
+      "total_water_km2": 293.1,
+      "permanent_wet_km2": 210.83,
+      "new_flood_km2": 82.27,
+      "receding_km2": 184.04,
+      "flooded_veg_km2": 32.35,
+      "total_inundated_with_veg_km2": 325.45,
+      "otsu_raw_hv_db": -15.75,
+      "threshold_hv_db": -16.5
+    },
+    {
+      "date": "2026-09-22",
+      "total_water_km2": 266.08,
+      "permanent_wet_km2": 207.05,
+      "new_flood_km2": 59.03,
+      "receding_km2": 212.84,
+      "flooded_veg_km2": 122.8,
+      "total_inundated_with_veg_km2": 388.88,
+      "otsu_raw_hv_db": -15.59,
+      "threshold_hv_db": -16.5
+    },
+    {
+      "date": "2026-10-04",
+      "total_water_km2": 209.13,
+      "permanent_wet_km2": 186.55,
+      "new_flood_km2": 22.57,
+      "receding_km2": 270.36,
+      "flooded_veg_km2": 185.15,
+      "total_inundated_with_veg_km2": 394.28,
+      "otsu_raw_hv_db": -15.86,
+      "threshold_hv_db": -16.5
+    },
+    {
+      "date": "2026-10-16",
+      "total_water_km2": 195.97,
+      "permanent_wet_km2": 183.02,
+      "new_flood_km2": 12.95,
+      "receding_km2": 283.96,
+      "flooded_veg_km2": 232.91,
+      "total_inundated_with_veg_km2": 428.88,
+      "otsu_raw_hv_db": -16.27,
+      "threshold_hv_db": -16.5
+    },
+    {
+      "date": "2026-10-28",
+      "total_water_km2": 190.13,
+      "permanent_wet_km2": 179.37,
+      "new_flood_km2": 10.76,
+      "receding_km2": 290.69,
+      "flooded_veg_km2": 179.7,
+      "total_inundated_with_veg_km2": 369.83,
+      "otsu_raw_hv_db": -16.44,
+      "threshold_hv_db": -16.5
+    },
+    {
+      "date": "2026-11-09",
+      "total_water_km2": 200.64,
+      "permanent_wet_km2": 180.36,
+      "new_flood_km2": 20.28,
+      "receding_km2": 283.71,
+      "flooded_veg_km2": 79.13,
+      "total_inundated_with_veg_km2": 279.77,
+      "otsu_raw_hv_db": -16.16,
+      "threshold_hv_db": -16.5
+    }
+  ],
+  "jamuna_transects": [
+    {
+      "id": "T1",
+      "name": "Northern Reach (Kazipur / Sariakandi Char Complex)",
+      "lat_deg": 24.6959,
+      "lon_range": [
+        89.4598,
+        89.8632
+      ],
+      "row_index": 110,
+      "width_early_monsoon_m": 4080,
+      "width_peak_monsoon_m": 11920,
+      "width_post_monsoon_m": 4480,
+      "char_emergence_m": 7440,
+      "bank_erosion_m": 640,
+      "west_bank_shift_m": 80,
+      "east_bank_shift_m": 160
+    },
+    {
+      "id": "T2",
+      "name": "Central Reach (Sirajganj Hardpoint & Braided Belt)",
+      "lat_deg": 24.5906,
+      "lon_range": [
+        89.4627,
+        89.8658
+      ],
+      "row_index": 256,
+      "width_early_monsoon_m": 6400,
+      "width_peak_monsoon_m": 9040,
+      "width_post_monsoon_m": 5600,
+      "char_emergence_m": 3440,
+      "bank_erosion_m": 240,
+      "west_bank_shift_m": 0,
+      "east_bank_shift_m": -80
+    },
+    {
+      "id": "T3",
+      "name": "Southern Reach (Belkuchi / Kalihati Bifurcation)",
+      "lat_deg": 24.4904,
+      "lon_range": [
+        89.4656,
+        89.8683
+      ],
+      "row_index": 395,
+      "width_early_monsoon_m": 3440,
+      "width_peak_monsoon_m": 10240,
+      "width_post_monsoon_m": 4000,
+      "char_emergence_m": 6800,
+      "bank_erosion_m": 720,
+      "west_bank_shift_m": 0,
+      "east_bank_shift_m": 0
+    }
+  ]
+}

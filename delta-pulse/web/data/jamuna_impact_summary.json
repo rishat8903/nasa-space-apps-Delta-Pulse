@@ -1,0 +1,410 @@
+{
+  "aoi_id": "jamuna",
+  "aoi_name": "Brahmaputra-Jamuna Floodplain & Char Lands",
+  "peak_flood_date": "2026-10-16",
+  "total_population_in_aoi": 2268672,
+  "total_cropland_in_aoi_ha": 91425.3,
+  "time_series": [
+    {
+      "date": "2026-06-18",
+      "people_exposed_estimate": 12685,
+      "people_exposed_open_water": 7452,
+      "people_exposed_range": [
+        10783,
+        14588
+      ],
+      "cropland_flooded_ha": 2743.0,
+      "cropland_open_water_ha": 653.4,
+      "cropland_flooded_range_ha": [
+        2468.7,
+        3017.3
+      ],
+      "uncertainty_note": "WorldPop 100m UN-adjusted constrained estimate (\u00b115% range); ESA WorldCover 10m cropland (\u00b110% range)."
+    },
+    {
+      "date": "2026-06-30",
+      "people_exposed_estimate": 20246,
+      "people_exposed_open_water": 17377,
+      "people_exposed_range": [
+        17209,
+        23283
+      ],
+      "cropland_flooded_ha": 3929.6,
+      "cropland_open_water_ha": 2970.2,
+      "cropland_flooded_range_ha": [
+        3536.6,
+        4322.6
+      ],
+      "uncertainty_note": "WorldPop 100m UN-adjusted constrained estimate (\u00b115% range); ESA WorldCover 10m cropland (\u00b110% range)."
+    },
+    {
+      "date": "2026-07-12",
+      "people_exposed_estimate": 14150,
+      "people_exposed_open_water": 5841,
+      "people_exposed_range": [
+        12027,
+        16272
+      ],
+      "cropland_flooded_ha": 3344.0,
+      "cropland_open_water_ha": 1802.2,
+      "cropland_flooded_range_ha": [
+        3009.6,
+        3678.4
+      ],
+      "uncertainty_note": "WorldPop 100m UN-adjusted constrained estimate (\u00b115% range); ESA WorldCover 10m cropland (\u00b110% range)."
+    },
+    {
+      "date": "2026-07-24",
+      "people_exposed_estimate": 42124,
+      "people_exposed_open_water": 40089,
+      "people_exposed_range": [
+        35805,
+        48442
+      ],
+      "cropland_flooded_ha": 10243.8,
+      "cropland_open_water_ha": 9842.6,
+      "cropland_flooded_range_ha": [
+        9219.4,
+        11268.2
+      ],
+      "uncertainty_note": "WorldPop 100m UN-adjusted constrained estimate (\u00b115% range); ESA WorldCover 10m cropland (\u00b110% range)."
+    },
+    {
+      "date": "2026-08-17",
+      "people_exposed_estimate": 20002,
+      "people_exposed_open_water": 16189,
+      "people_exposed_range": [
+        17002,
+        23003
+      ],
+      "cropland_flooded_ha": 5366.4,
+      "cropland_open_water_ha": 5041.9,
+      "cropland_flooded_range_ha": [
+        4829.8,
+        5903.0
+      ],
+      "uncertainty_note": "WorldPop 100m UN-adjusted constrained estimate (\u00b115% range); ESA WorldCover 10m cropland (\u00b110% range)."
+    },
+    {
+      "date": "2026-08-29",
+      "people_exposed_estimate": 27719,
+      "people_exposed_open_water": 21961,
+      "people_exposed_range": [
+        23561,
+        31876
+      ],
+      "cropland_flooded_ha": 5703.0,
+      "cropland_open_water_ha": 4928.0,
+      "cropland_flooded_range_ha": [
+        5132.7,
+        6273.3
+      ],
+      "uncertainty_note": "WorldPop 100m UN-adjusted constrained estimate (\u00b115% range); ESA WorldCover 10m cropland (\u00b110% range)."
+    },
+    {
+      "date": "2026-09-10",
+      "people_exposed_estimate": 37719,
+      "people_exposed_open_water": 22377,
+      "people_exposed_range": [
+        32061,
+        43377
+      ],
+      "cropland_flooded_ha": 7534.7,
+      "cropland_open_water_ha": 4529.9,
+      "cropland_flooded_range_ha": [
+        6781.2,
+        8288.2
+      ],
+      "uncertainty_note": "WorldPop 100m UN-adjusted constrained estimate (\u00b115% range); ESA WorldCover 10m cropland (\u00b110% range)."
+    },
+    {
+      "date": "2026-09-22",
+      "people_exposed_estimate": 76342,
+      "people_exposed_open_water": 17983,
+      "people_exposed_range": [
+        64891,
+        87793
+      ],
+      "cropland_flooded_ha": 14551.7,
+      "cropland_open_water_ha": 2684.8,
+      "cropland_flooded_range_ha": [
+        13096.5,
+        16006.9
+      ],
+      "uncertainty_note": "WorldPop 100m UN-adjusted constrained estimate (\u00b115% range); ESA WorldCover 10m cropland (\u00b110% range)."
+    },
+    {
+      "date": "2026-10-04",
+      "people_exposed_estimate": 96128,
+      "people_exposed_open_water": 9356,
+      "people_exposed_range": [
+        81709,
+        110547
+      ],
+      "cropland_flooded_ha": 18963.8,
+      "cropland_open_water_ha": 1047.7,
+      "cropland_flooded_range_ha": [
+        17067.4,
+        20860.2
+      ],
+      "uncertainty_note": "WorldPop 100m UN-adjusted constrained estimate (\u00b115% range); ESA WorldCover 10m cropland (\u00b110% range)."
+    },
+    {
+      "date": "2026-10-16",
+      "people_exposed_estimate": 122419,
+      "people_exposed_open_water": 4850,
+      "people_exposed_range": [
+        104056,
+        140782
+      ],
+      "cropland_flooded_ha": 23015.7,
+      "cropland_open_water_ha": 618.2,
+      "cropland_flooded_range_ha": [
+        20714.1,
+        25317.3
+      ],
+      "uncertainty_note": "WorldPop 100m UN-adjusted constrained estimate (\u00b115% range); ESA WorldCover 10m cropland (\u00b110% range)."
+    },
+    {
+      "date": "2026-10-28",
+      "people_exposed_estimate": 95379,
+      "people_exposed_open_water": 3252,
+      "people_exposed_range": [
+        81072,
+        109685
+      ],
+      "cropland_flooded_ha": 17964.2,
+      "cropland_open_water_ha": 626.6,
+      "cropland_flooded_range_ha": [
+        16167.8,
+        19760.6
+      ],
+      "uncertainty_note": "WorldPop 100m UN-adjusted constrained estimate (\u00b115% range); ESA WorldCover 10m cropland (\u00b110% range)."
+    },
+    {
+      "date": "2026-11-09",
+      "people_exposed_estimate": 39567,
+      "people_exposed_open_water": 5906,
+      "people_exposed_range": [
+        33632,
+        45502
+      ],
+      "cropland_flooded_ha": 8797.4,
+      "cropland_open_water_ha": 1119.4,
+      "cropland_flooded_range_ha": [
+        7917.7,
+        9677.1
+      ],
+      "uncertainty_note": "WorldPop 100m UN-adjusted constrained estimate (\u00b115% range); ESA WorldCover 10m cropland (\u00b110% range)."
+    }
+  ],
+  "ranked_district_impact": [
+    {
+      "district": "Sirajganj",
+      "key_upazilas": "Sirajganj Sadar, Kazipur, Royganj, Ullah Para",
+      "total_population_in_aoi": 1334119,
+      "people_affected_peak": 75260,
+      "people_affected_range": [
+        63971,
+        86549
+      ],
+      "cropland_affected_ha": 12809.0,
+      "severity_rank": 1
+    },
+    {
+      "district": "Bogra",
+      "key_upazilas": "Dhunat, Sherpur, Sariakandi, Shajahanpur",
+      "total_population_in_aoi": 491389,
+      "people_affected_peak": 28464,
+      "people_affected_range": [
+        24194,
+        32733
+      ],
+      "cropland_affected_ha": 5540.5,
+      "severity_rank": 2
+    },
+    {
+      "district": "Jamalpur",
+      "key_upazilas": "Sarishabari",
+      "total_population_in_aoi": 244669,
+      "people_affected_peak": 9691,
+      "people_affected_range": [
+        8237,
+        11144
+      ],
+      "cropland_affected_ha": 3148.2,
+      "severity_rank": 3
+    },
+    {
+      "district": "Tangail",
+      "key_upazilas": "Bhuapur, Gopalpur, Dhanbari",
+      "total_population_in_aoi": 198495,
+      "people_affected_peak": 9005,
+      "people_affected_range": [
+        7654,
+        10355
+      ],
+      "cropland_affected_ha": 1518.1,
+      "severity_rank": 4
+    }
+  ],
+  "ranked_upazila_impact": [
+    {
+      "upazila": "Sirajganj Sadar",
+      "district": "Sirajganj",
+      "aoi_footprint_km2": 283.3,
+      "total_population_in_aoi": 521475,
+      "people_affected_peak": 25568,
+      "people_affected_range": [
+        21733,
+        29403
+      ],
+      "cropland_affected_ha": 3861.8,
+      "severity_rank": 1
+    },
+    {
+      "upazila": "Kazipur",
+      "district": "Sirajganj",
+      "aoi_footprint_km2": 372.4,
+      "total_population_in_aoi": 337881,
+      "people_affected_peak": 16734,
+      "people_affected_range": [
+        14224,
+        19244
+      ],
+      "cropland_affected_ha": 3998.7,
+      "severity_rank": 2
+    },
+    {
+      "upazila": "Royganj",
+      "district": "Sirajganj",
+      "aoi_footprint_km2": 206.5,
+      "total_population_in_aoi": 351136,
+      "people_affected_peak": 16685,
+      "people_affected_range": [
+        14182,
+        19188
+      ],
+      "cropland_affected_ha": 3997.4,
+      "severity_rank": 3
+    },
+    {
+      "upazila": "Dhunat",
+      "district": "Bogra",
+      "aoi_footprint_km2": 239.5,
+      "total_population_in_aoi": 329918,
+      "people_affected_peak": 12833,
+      "people_affected_range": [
+        10908,
+        14758
+      ],
+      "cropland_affected_ha": 3878.4,
+      "severity_rank": 4
+    },
+    {
+      "upazila": "Sherpur",
+      "district": "Bogra",
+      "aoi_footprint_km2": 77.7,
+      "total_population_in_aoi": 147001,
+      "people_affected_peak": 15132,
+      "people_affected_range": [
+        12862,
+        17402
+      ],
+      "cropland_affected_ha": 1204.5,
+      "severity_rank": 5
+    },
+    {
+      "upazila": "Sarishabari",
+      "district": "Jamalpur",
+      "aoi_footprint_km2": 168.9,
+      "total_population_in_aoi": 244669,
+      "people_affected_peak": 9691,
+      "people_affected_range": [
+        8237,
+        11144
+      ],
+      "cropland_affected_ha": 3148.2,
+      "severity_rank": 6
+    },
+    {
+      "upazila": "Ullah Para",
+      "district": "Sirajganj",
+      "aoi_footprint_km2": 33.1,
+      "total_population_in_aoi": 76472,
+      "people_affected_peak": 10462,
+      "people_affected_range": [
+        8893,
+        12031
+      ],
+      "cropland_affected_ha": 640.0,
+      "severity_rank": 7
+    },
+    {
+      "upazila": "Bhuapur",
+      "district": "Tangail",
+      "aoi_footprint_km2": 195.1,
+      "total_population_in_aoi": 153681,
+      "people_affected_peak": 7048,
+      "people_affected_range": [
+        5991,
+        8105
+      ],
+      "cropland_affected_ha": 793.6,
+      "severity_rank": 8
+    },
+    {
+      "upazila": "Kamarkhanda",
+      "district": "Sirajganj",
+      "aoi_footprint_km2": 19.0,
+      "total_population_in_aoi": 47156,
+      "people_affected_peak": 5812,
+      "people_affected_range": [
+        4940,
+        6683
+      ],
+      "cropland_affected_ha": 311.0,
+      "severity_rank": 9
+    },
+    {
+      "upazila": "Gopalpur",
+      "district": "Tangail",
+      "aoi_footprint_km2": 39.9,
+      "total_population_in_aoi": 43707,
+      "people_affected_peak": 1891,
+      "people_affected_range": [
+        1608,
+        2175
+      ],
+      "cropland_affected_ha": 673.3,
+      "severity_rank": 10
+    },
+    {
+      "upazila": "Sariakandi",
+      "district": "Bogra",
+      "aoi_footprint_km2": 28.2,
+      "total_population_in_aoi": 10454,
+      "people_affected_peak": 498,
+      "people_affected_range": [
+        424,
+        573
+      ],
+      "cropland_affected_ha": 218.9,
+      "severity_rank": 11
+    },
+    {
+      "upazila": "Shajahanpur",
+      "district": "Bogra",
+      "aoi_footprint_km2": 8.0,
+      "total_population_in_aoi": 2091,
+      "people_affected_peak": 0,
+      "people_affected_range": [
+        0,
+        0
+      ],
+      "cropland_affected_ha": 182.4,
+      "severity_rank": 12
+    }
+  ],
+  "methodology": "Intersected real NISAR L2 GCOV new-flood masks (open water minus JRC permanent water, plus double-bounce flooded vegetation) with real WorldPop 100m UN-adjusted constrained population counts (bgd_ppp_2020_UNadj_constrained.tif), real ESA WorldCover 10m v200 Cropland (Class 40), and real geoBoundaries ADM2/ADM3 polygons."
+}

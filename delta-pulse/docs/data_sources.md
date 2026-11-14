@@ -1,0 +1,38 @@
+# Delta Pulse — Complete Dataset Inventory & Provenance (`delta-pulse/datasets/`)
+
+Every map overlay, time-series trajectory, agricultural phenology cluster, human exposure table, and multi-sensor validation metric in **Delta Pulse** is computed from **real satellite and geospatial datasets** stored locally in [`delta-pulse/datasets/`](file:///d:/Strind/Download/NASA%20Space%20apps%20%20challenge/delta-pulse/datasets/). Zero synthetic or fabricated grids are used anywhere in the pipeline.
+
+---
+
+## 1. Summary of All 7 Real Datasets in `delta-pulse/datasets/`
+
+| # | Dataset Name | Sensor / Type | Challenge Resource Link Used | Local Directory & Files in `delta-pulse/datasets/` | Native Resolution → Project Grid | Temporal Coverage |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **1** | **NASA–ISRO NISAR L2 GCOV (`NISAR_L2_GCOV_PROVISIONAL_V1`)** | Active L-Band SAR ($\lambda = 24\text{ cm}$, $1.25\text{ GHz}$, Dual-Pol `HHHH` & `HVHV`) | [ASF Data Search Vertex](https://search.asf.alaska.edu/) & [NASA Earthdata Search](https://search.earthdata.nasa.gov/search) & [NISAR Data User Guide](https://nisar-docs.asf.alaska.edu/) | `datasets/nisar_gcov/jamuna_gcov_raw_cube.nc` (`42.0 MB`)<br>`datasets/nisar_gcov/haor_gcov_raw_cube.nc` (`42.0 MB`)<br>`datasets/nisar_gcov/jamuna_metadata.csv`<br>`datasets/nisar_gcov/haor_metadata.csv` | `80 m` (`frequencyB` grid, `EPSG:32646` UTM Zone 46N, `512 × 512` pixels = `1,677.7 km²` per AOI) | **12 Calibrated Passes** (`2026-06-18` to `2026-11-09`, Track `069`, Frame `014`, Ascending) |
+| **2** | **Copernicus Sentinel-1 C-Band RTC (`GAMMA0`)** | Active C-Band SAR ($\lambda = 5.6\text{ cm}$, $5.405\text{ GHz}$, Dual-Pol `VV` & `VH`) | [ASF Data Search Vertex](https://search.asf.alaska.edu/) / Planetary Computer STAC (`sentinel-1-rtc`) | `datasets/sentinel1_rtc/jamuna_s1_rtc_2026-07-25_vv_vh_db_80m.tif` (`1.8 MB`)<br>`datasets/sentinel1_rtc/haor_s1_rtc_2026-07-25_vv_vh_db_80m.tif` (`1.8 MB`)<br>`datasets/sentinel1_rtc/*_s1_metadata.json` | `10 m / 20 m` native warped to exact `80 m` NISAR UTM 46N grid (`100.0%` coverage in both AOIs) | `2026-07-25` & `2026-07-22` (co-located with NISAR Peak Monsoon `2026-07-24`) |
+| **3** | **Copernicus Sentinel-2 L2A Multispectral Optical (`MSI`)** | Passive Optical (`B03` Green, `B04` Red, `B08` NIR, `B11` SWIR16 + `NDWI` & `MNDWI`) | [Intro to Remote Sensing](https://www.earthdata.nasa.gov/learn/earth-observation-data-basics/remote-sensing) / Element84 Earth Search STAC (`sentinel-2-l2a`) | `datasets/sentinel2_optical/jamuna_s2_l2a_2026-11-09_bands_ndwi_80m.tif` (`5.7 MB`)<br>`datasets/sentinel2_optical/haor_s2_l2a_2026-11-13_bands_ndwi_80m.tif` (`5.7 MB`)<br>`datasets/sentinel2_optical/*_s2_metadata.json` | `10 m / 20 m` native warped to exact `80 m` NISAR UTM 46N grid (`100.0%` coverage in both AOIs) | `2026-11-09` (Jamuna, same day as NISAR!) & `2026-11-13` (Haor, `< 0.1%` cloud cover) |
+| **4** | **EC JRC Global Surface Water (`v1.4`)** | 38-Year Landsat Long-Term Water Occurrence (`0–100%`) | Contextual GIS Layer per Challenge Objectives (`JRC/GSW1_4/GlobalSurfaceWater`) | `datasets/jrc_water/jamuna_jrc_occurrence_80m.tif` (`107 KB`)<br>`datasets/jrc_water/haor_jrc_occurrence_80m.tif` (`175 KB`) | `30 m` native bilinearly warped to `80 m` NISAR UTM 46N grid | `1984–2021` Multi-Decadal Climatology |
+| **5** | **ESA WorldCover 10m (`v200`)** | Global Land Cover Classification (Sentinel-1 + Sentinel-2) | Contextual Vegetation & Land-Use Layer per Challenge Objectives (`s3://esa-worldcover/v200`) | `datasets/worldcover/jamuna_worldcover_80m.tif` (`42 KB`)<br>`datasets/worldcover/haor_worldcover_80m.tif` (`47 KB`) | `10 m` native mode-resampled to `80 m` NISAR UTM 46N grid | `v200` Baseline (`54.49%` Cropland in Jamuna; `49.01%` Cropland & `31.87%` Wetland in Haor) |
+| **6** | **WorldPop 100m UN-Adjusted Constrained Population** | Gridded Human Population Counts (`people / hectare`) | Contextual Population Layer per Challenge Objectives (`WorldPop/GP/100m/pop/BGD`) | `datasets/worldpop/bgd_ppp_2020_UNadj_constrained.tif` (`13.9 MB`)<br>`datasets/worldpop/jamuna_worldpop_80m.tif` (`207 KB`)<br>`datasets/worldpop/haor_worldpop_80m.tif` (`77 KB`) | `100 m` native sum-conserving warp (`× 0.64`) to `80 m` NISAR UTM 46N grid | UN-Adjusted (`2,268,672` people in Jamuna AOI; `1,257,412` people in Haor AOI) |
+| **7** | **geoBoundaries Bangladesh `ADM2` & `ADM3`** | Official District (`ADM2`) & Upazila (`ADM3`) Administrative Polygons | Contextual GIS Layer per Challenge Objectives (`wmgeolab/geoBoundaries`) | `datasets/admin_boundaries/BGD_ADM2_districts.geojson` (`45.5 MB`)<br>`datasets/admin_boundaries/BGD_ADM3_upazilas.geojson` (`121.8 MB`)<br>`datasets/admin_boundaries/*_upazilas_80m.tif` & `*_lookup.json` | Vector GeoJSON + rasterized `80 m` Upazila ID grids (`16` Upazilas in Jamuna; `12` Upazilas in Haor) | `geoBoundaries` v6.0.0 |
+
+---
+
+## 2. Exact NISAR L2 GCOV Granules Streamed from NASA ASF DAAC
+
+All 12 passes come from **Track 069, Frame 014, Ascending (`T069_F014_A`)** during the **Provisional Calibrated** mission phase (post-June 17, 2026). Pre-calibration `BETA` granules from Oct 2025 – Jan 2026 were intentionally excluded from quantitative time series in accordance with the [NISAR Data User Guide](https://nisar-docs.asf.alaska.edu/).
+
+| Pass # | Acquisition Date | Cycle | Granule ID (`NISAR_L2_GCOV_PROVISIONAL_V1`) | CRID | Product Type |
+| :---: | :---: | :---: | :--- | :---: | :---: |
+| **01** | `2026-06-18` | `023` | `NISAR_L2_PR_GCOV_023_069_A_014_2005_DHDH_A_20260618T121325_20260618T121400_P05023_N_F_J_001` | `P05023` | Provisional Standard (`PR_GCOV`) |
+| **02** | `2026-06-30` | `024` | `NISAR_L2_PR_GCOV_024_069_A_014_2005_DHDH_A_20260630T121326_20260630T121401_P05023_N_F_J_001` | `P05023` | Provisional Standard (`PR_GCOV`) |
+| **03** | `2026-07-12` | `025` | `NISAR_L2_PR_GCOV_025_069_A_014_2005_DHDH_A_20260712T121327_20260712T121402_P05023_N_F_J_001` | `P05023` | Provisional Standard (`PR_GCOV`) |
+| **04** | `2026-07-24` | `026` | `NISAR_L2_PR_GCOV_026_069_A_014_2005_DHDH_A_20260724T121328_20260724T121402_P05023_N_F_J_001` | `P05023` | Provisional Standard (`PR_GCOV`) |
+| **05** | `2026-08-17` | `028` | `NISAR_L2_PR_GCOV_028_069_A_014_2005_DHDH_A_20260817T121329_20260817T121404_P05023_N_F_J_001` | `P05023` | Provisional Standard (`PR_GCOV`) |
+| **06** | `2026-08-29` | `029` | `NISAR_L2_PR_GCOV_029_069_A_014_2005_DHDH_A_20260829T121330_20260829T121404_P05023_N_F_J_001` | `P05023` | Provisional Standard (`PR_GCOV`) |
+| **07** | `2026-09-10` | `030` | `NISAR_L2_PR_GCOV_030_069_A_014_2005_DHDH_A_20260910T121330_20260910T121405_P05023_N_F_J_001` | `P05023` | Provisional Standard (`PR_GCOV`) |
+| **08** | `2026-09-22` | `031` | `NISAR_L2_PR_GCOV_031_069_A_014_2005_DHDH_A_20260922T121331_20260922T121406_P05023_N_F_J_001` | `P05023` | Provisional Standard (`PR_GCOV`) |
+| **09** | `2026-10-04` | `032` | `NISAR_L2_PR_GCOV_032_069_A_014_2005_DHDH_A_20261004T121331_20261004T121406_P05023_N_F_J_001` | `P05023` | Provisional Standard (`PR_GCOV`) |
+| **10** | `2026-10-16` | `033` | `NISAR_L2_PR_GCOV_033_069_A_014_2005_DHDH_A_20261016T121332_20261016T121406_P05036_N_F_J_001` | `P05036` | Provisional Standard (`PR_GCOV`) |
+| **11** | `2026-10-28` | `034` | `NISAR_L2_PR_GCOV_034_069_A_014_2005_DHDH_A_20261028T121331_20261028T121406_P05036_N_F_J_001` | `P05036` | Provisional Standard (`PR_GCOV`) |
+| **12** | `2026-11-09` | `035` | `NISAR_L2_PR_GCOV_035_069_A_014_2005_DHDH_A_20261109T121330_20261109T121405_P05036_N_F_J_001` | `P05036` | Provisional Standard (`PR_GCOV`, deduplicated from `UR_GCOV`) |
