@@ -4,245 +4,352 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Delta Pulse — NISAR L-Band Radar Observatory | NASA Space Apps 2026</title>
-  <!-- Google Fonts -->
+  <!-- Google Fonts: JetBrains Mono (Telemetry/Numerics) & Plus Jakarta Sans (Primary UI) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
-  <!-- Custom Mission Control Design System -->
+  <!-- NASA-STD-3001 Scientific Mission Control Design System -->
   <link rel="stylesheet" href="src/style.css" />
 </head>
 <body>
 
   <!-- ====================================================================
-       TOP MISSION CONTROL HEADER
+       TOP MISSION CONTROL FLIGHT HEADER
        ==================================================================== -->
   <header class="top-header">
     <div class="brand-cluster">
-      <div class="pulse-beacon" aria-hidden="true">
-        <div class="pulse-beacon-core"></div>
-      </div>
       <div class="brand-titles">
-        <div class="brand-row">
-          <span class="brand-name">DELTA PULSE</span>
-          <span class="badge badge-gold">NISAR L-BAND SAR (24 cm)</span>
-          <span class="badge badge-emerald" title="Uses only post-June 17, 2026 Provisional Calibrated NISAR L2 GCOV scenes">PROVISIONAL CALIBRATED</span>
-        </div>
-        <span class="brand-sub">NASA Space Apps Challenge 2026 • "Dancing with the SARs" • Bengal Delta Surface Observatory</span>
+        <span class="brand-name">DELTA PULSE</span>
+        <span class="brand-sub">NASA NISAR Observatory</span>
       </div>
     </div>
 
-    <nav class="nav-pills" aria-label="Main Navigation">
-      <button class="nav-tab active" data-tab="story">01 Story Arc</button>
-      <button class="nav-tab" data-tab="explorer">02 Radar Explorer</button>
-      <button class="nav-tab" data-tab="paddy">03 Paddy Rhythm</button>
-      <button class="nav-tab" data-tab="impact">04 Impact &amp; Validation</button>
-      <button class="nav-tab" data-tab="anywhere">05 Try Anywhere</button>
+    <nav class="nav-pills" aria-label="Observatory Navigation">
+      <button class="nav-tab active" data-tab="story">Overview</button>
+      <button class="nav-tab" data-tab="explorer">Radar Explorer</button>
+      <button class="nav-tab" data-tab="paddy">Paddy Phenology</button>
+      <button class="nav-tab" data-tab="impact">Impact &amp; Validation</button>
+      <button class="nav-tab" data-tab="anywhere">Global Finder</button>
     </nav>
 
     <div class="header-actions">
       <div class="aoi-pill-box">
-        <label for="aoi-select">Study Area</label>
-        <select id="aoi-select" class="select-input">
-          <option value="jamuna">Jamuna Floodplain &amp; Chars (Sirajganj / Bogra)</option>
-          <option value="haor">Sunamganj &amp; Sylhet Haor Basin Wetlands</option>
+        <label for="aoi-select">Region</label>
+        <select id="aoi-select" class="select-input" aria-label="Select study area">
+          <option value="jamuna">Jamuna Basin</option>
+          <option value="haor">Haor Basin</option>
         </select>
       </div>
     </div>
   </header>
 
   <!-- ====================================================================
-       VIEW 01: STORY ARC & MISSION OVERVIEW
+       VIEW 01: STORY ARC & OBSERVATORY FLIGHT DECK
        ==================================================================== -->
   <section id="view-story" class="view-section active">
     <div class="page-container">
-      <div class="hero-banner">
-        <div class="hero-grid">
-          <div>
-            <div class="hero-eyebrow">
-              <span>🛰️ NASA–ISRO NISAR L2 GCOV • TRACK 069 FRAME 014 ASCENDING</span>
+
+      <!-- Scientific Hero Header -->
+      <div class="story-hero-section">
+        <div class="story-hero-header">
+          <div class="story-kicker">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"/></svg>
+            <span>NASA–ISRO SYNTHETIC APERTURE RADAR (NISAR) OBSERVATORY</span>
+          </div>
+          <h1 class="story-headline">
+            Mapping Earth's Surface Dynamics Through the Monsoon Cloud Veil
+          </h1>
+          <p class="story-lead">
+            During South Asia's monsoon, unbroken cloud decks blind optical satellites while rivers swell by kilometers and seasonal wetlands submerge agricultural basins. <strong>Delta Pulse</strong> harnesses calibrated 24 cm L-band Synthetic Aperture Radar from the <strong>NASA–ISRO NISAR mission</strong> to pierce cloud cover, tracking flood pulses, flooded vegetation, sandbar migration, and crop phenology across the Bengal Delta.
+          </p>
+          <div class="story-cta-row">
+            <button id="btn-launch-explorer" class="btn btn-nasa">
+              <span>Launch Radar Explorer</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+            <button id="btn-hero-radio" class="btn btn-outline">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              <span>Hear Change Radio</span>
+            </button>
+            <button id="btn-hero-datasets" class="btn btn-ghost">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              <span>Multi-Sensor Validation</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Integrated Telemetry Ribbon -->
+        <div class="telemetry-ribbon">
+          <div class="telemetry-ribbon-label">
+            <span class="telemetry-pulse-dot"></span>
+            <span class="telemetry-aoi-text" id="hero-telemetry-aoi">JAMUNA FLOODPLAIN (1,678 KM²)</span>
+          </div>
+          <div class="telemetry-strip-grid">
+            <div class="telemetry-item">
+              <span class="telemetry-val" id="hero-stat-passes">12 Passes</span>
+              <span class="telemetry-lbl">Calibrated 12-Day Cycles</span>
             </div>
-            <h1 class="hero-title">
-              How the Bengal Delta <span class="gold-gradient-text">Breathes</span> Through the <span class="cyan-gradient-text">Monsoon</span>
-            </h1>
-            <p class="hero-lead">
-              From June to October, unbroken monsoon clouds blind optical satellites over Bangladesh while rivers swell by kilometers and wetlands submerge entire agricultural basins. <strong>Delta Pulse</strong> harnesses real 24 cm L-band Synthetic Aperture Radar from the <strong>NASA–ISRO NISAR mission</strong> alongside 6 multi-sensor datasets to track flood pulses, flooded vegetation, braided sandbar migration, and agricultural rhythms—and translates radar backscatter into sound.
+            <div class="telemetry-item">
+              <span class="telemetry-val" id="hero-stat-peak-water">-- km²</span>
+              <span class="telemetry-lbl" id="hero-stat-peak-date">Peak Inundation Extent</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-val" id="hero-stat-pop">--</span>
+              <span class="telemetry-lbl">Exposed Population (WorldPop)</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-val" id="hero-stat-val">--</span>
+              <span class="telemetry-lbl">Multi-Sensor Concordance</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 1: The Remote Sensing Challenge (Optical vs Radar) -->
+      <div class="story-module">
+        <div class="module-header">
+          <span class="module-number">01</span>
+          <div>
+            <h2 class="module-title">The Remote Sensing Challenge: Optical Blindness vs. L-Band Penetration</h2>
+            <p class="module-desc">Why traditional satellite monitoring fails during extreme flood seasons and how active microwave imaging solves it.</p>
+          </div>
+        </div>
+
+        <div class="comparison-grid">
+          <div class="comparison-card comp-optical">
+            <div class="comp-badge-row">
+              <span class="comp-sensor-title">Passive Optical Imagery</span>
+              <span class="comp-status status-dim">Obscured by Clouds</span>
+            </div>
+            <div class="comp-spec">Sentinel-2 MSI • Landsat 8/9 • 0.4–0.8 µm Wavelength</div>
+            <p class="comp-body">
+              Optical sensors rely on reflected solar illumination. During the South Asian monsoon (June–October), cloud cover over the Bengal Delta regularly exceeds <strong>90%</strong>, causing optical systems to record only opaque white clouds and ground shadows for months at a time.
             </p>
-            <div class="hero-cta-row">
-              <button id="btn-launch-explorer" class="btn btn-gold">
-                <span>Launch Interactive Radar Explorer →</span>
-              </button>
-              <button id="btn-hero-radio" class="btn btn-cyan">
-                <span>🔊 Hear the Monsoon ("Change Radio")</span>
-              </button>
-              <button id="btn-hero-datasets" class="btn btn-outline">
-                <span>📊 View Impact &amp; Sensor Validation</span>
-              </button>
+            <ul class="comp-list">
+              <li><strong>Zero Cloud Penetration:</strong> 0 to 1 cloud-free acquisitions during the entire peak monsoon.</li>
+              <li><strong>Canopy Blockade:</strong> Cannot detect water underneath emergent rice or wetland canopies.</li>
+              <li><strong>Passive Daylight Dependency:</strong> Cannot acquire night-time flood progression.</li>
+            </ul>
+          </div>
+
+          <div class="comparison-card comp-radar">
+            <div class="comp-badge-row">
+              <span class="comp-sensor-title">Active Synthetic Aperture Radar</span>
+              <span class="comp-status status-nominal">100% All-Weather Penetration</span>
+            </div>
+            <div class="comp-spec">NASA–ISRO NISAR L2 GCOV • 1.25 GHz (24 cm) Wavelength</div>
+            <p class="comp-body">
+              NISAR emits its own active microwave pulses that traverse clouds, torrential rain, and atmospheric vapor without degradation. Its long <strong>24 cm wavelength</strong> penetrates deep into crop canopies to interact with underlying water via dihedral double-bounce scattering.
+            </p>
+            <ul class="comp-list">
+              <li><strong>Uninterrupted Time Series:</strong> Precise 12-day orbital repeat day or night.</li>
+              <li><strong>Sub-Canopy Water Detection:</strong> Differentiates open water vs. flooded vegetation.</li>
+              <li><strong>Dielectric &amp; Roughness Sensitivity:</strong> Detects centimeters of surface change.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: 5-Phase Interactive Scientific Sequence -->
+      <div class="story-module">
+        <div class="module-header">
+          <span class="module-number">02</span>
+          <div>
+            <h2 class="module-title">The 5-Phase Monsoon Choreography</h2>
+            <p class="module-desc">Click any phase to open that exact acquisition, calibrated layer, and verified ground location in the Radar Explorer.</p>
+          </div>
+        </div>
+
+        <div class="sequence-track">
+          <div class="beat-card" data-beat="0">
+            <div class="beat-step-head">
+              <span class="beat-phase-tag">Phase 01</span>
+              <span class="beat-date">June 18</span>
+            </div>
+            <h3 class="beat-title">Cloud Penetration</h3>
+            <p class="beat-summary">NISAR's 1.25 GHz pulses pierce thick pre-monsoon cloud cover to establish baseline pre-flood terrain geometry.</p>
+            <div class="beat-meta-row">
+              <span class="beat-meta-key">Layer: Dual-Pol RGB</span>
+              <span class="beat-action">Open in Explorer →</span>
             </div>
           </div>
 
-          <div class="telemetry-panel">
-            <div class="telemetry-header">
-              <span>LIVE AOI TELEMETRY</span>
-              <span id="hero-telemetry-aoi">JAMUNA FLOODPLAIN (1,678 KM²)</span>
+          <div class="beat-card" data-beat="1">
+            <div class="beat-step-head">
+              <span class="beat-phase-tag">Phase 02</span>
+              <span class="beat-date">July 12</span>
             </div>
-            <div class="telemetry-grid">
-              <div class="telemetry-stat">
-                <div class="telemetry-stat-label">Calibrated NISAR Passes</div>
-                <div class="telemetry-stat-val" id="hero-stat-passes">12 Passes</div>
-                <div class="telemetry-stat-sub">2026-06-18 → 2026-11-09 (12-day cycle)</div>
-              </div>
-              <div class="telemetry-stat">
-                <div class="telemetry-stat-label">Peak Monsoon Inundation</div>
-                <div class="telemetry-stat-val" id="hero-stat-peak-water">-- km²</div>
-                <div class="telemetry-stat-sub" id="hero-stat-peak-date">Open water + flooded veg</div>
-              </div>
-              <div class="telemetry-stat">
-                <div class="telemetry-stat-label">Peak Population Exposed</div>
-                <div class="telemetry-stat-val" id="hero-stat-pop">--</div>
-                <div class="telemetry-stat-sub">Real WorldPop 100m UN-Adj (±15%)</div>
-              </div>
-              <div class="telemetry-stat">
-                <div class="telemetry-stat-label">Multi-Sensor Validation</div>
-                <div class="telemetry-stat-val" id="hero-stat-val">--</div>
-                <div class="telemetry-stat-sub">NISAR vs Sentinel-1 RTC &amp; Sentinel-2</div>
-              </div>
+            <h3 class="beat-title">Specular Flood Swell</h3>
+            <p class="beat-summary">Smooth open floodwaters mirror microwaves away from the antenna, causing sharp co-pol drops below −16 dB.</p>
+            <div class="beat-meta-row">
+              <span class="beat-meta-key">Layer: Water Mask</span>
+              <span class="beat-action">Open in Explorer →</span>
+            </div>
+          </div>
+
+          <div class="beat-card" data-beat="2">
+            <div class="beat-step-head">
+              <span class="beat-phase-tag">Phase 03</span>
+              <span class="beat-date">August 05</span>
+            </div>
+            <h3 class="beat-title">Sub-Canopy Double-Bounce</h3>
+            <p class="beat-summary">24 cm microwaves penetrate emergent stems, bouncing off water to vertical stalks to produce a strong HH surge (&gt; −7.5 dB).</p>
+            <div class="beat-meta-row">
+              <span class="beat-meta-key">Layer: Flooded Veg</span>
+              <span class="beat-action">Open in Explorer →</span>
+            </div>
+          </div>
+
+          <div class="beat-card" data-beat="3">
+            <div class="beat-step-head">
+              <span class="beat-phase-tag">Phase 04</span>
+              <span class="beat-date">Sept 22</span>
+            </div>
+            <h3 class="beat-title">Braided Char Dynamics</h3>
+            <p class="beat-summary">12-cycle water recurrence frequency reveals bank erosion, shifting sandbars, and post-monsoon land emergence.</p>
+            <div class="beat-meta-row">
+              <span class="beat-meta-key">Layer: Recurrence %</span>
+              <span class="beat-action">Open in Explorer →</span>
+            </div>
+          </div>
+
+          <div class="beat-card" data-beat="4">
+            <div class="beat-step-head">
+              <span class="beat-phase-tag">Phase 05</span>
+              <span class="beat-date">Nov 09</span>
+            </div>
+            <h3 class="beat-title">Agronomic Phenology</h3>
+            <p class="beat-summary">Cross-polarized HV volume scattering maps Aman rice development from seedling transplanting to full canopy maturity.</p>
+            <div class="beat-meta-row">
+              <span class="beat-meta-key">Layer: Paddy Rhythm</span>
+              <span class="beat-action">Open in Explorer →</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 5 Interactive Story Beats -->
-      <div class="section-heading-row">
-        <div>
-          <h2 class="section-title">The 5-Act Monsoon Choreography (Click Any Act to Open in Explorer)</h2>
-          <p class="section-subtitle">Each act jumps directly to the calibrated NISAR date, thematic layer, and verified geographic pin on the map.</p>
+      <!-- Section 3: Physical Scattering Mechanics -->
+      <div class="story-module">
+        <div class="module-header">
+          <span class="module-number">03</span>
+          <div>
+            <h2 class="module-title">Radar Scattering Mechanics: How NISAR Reads Surface Structure</h2>
+            <p class="module-desc">The physical interaction between 24 cm microwave wavefronts and surface roughness, dielectric permittivity, and geometry.</p>
+          </div>
         </div>
-        <span class="badge badge-cyan">INTERACTIVE STORYBOOK</span>
+
+        <div class="physics-trio">
+          <div class="physics-card">
+            <div class="physics-diagram-box">
+              <svg viewBox="0 0 320 130" width="100%" height="100%" aria-hidden="true">
+                <!-- Incident and reflected ray for specular -->
+                <line x1="20" y1="20" x2="160" y2="105" stroke="#0b3d91" stroke-width="2.5" stroke-dasharray="4 2"/>
+                <polygon points="155,102 160,105 158,98" fill="#0b3d91"/>
+                <line x1="160" y1="105" x2="300" y2="20" stroke="#b45309" stroke-width="2.5"/>
+                <polygon points="295,23 300,20 297,27" fill="#b45309"/>
+                <!-- Water surface -->
+                <line x1="10" y1="105" x2="310" y2="105" stroke="#0284c7" stroke-width="3"/>
+                <rect x="10" y="106" width="300" height="16" fill="rgba(2, 132, 199, 0.08)"/>
+                <!-- Labels -->
+                <text x="35" y="45" font-family="monospace" font-size="10" fill="#0b3d91">Incident (37°)</text>
+                <text x="215" y="45" font-family="monospace" font-size="10" fill="#b45309">Forward Scatter</text>
+                <text x="100" y="122" font-family="sans-serif" font-size="10" font-weight="600" fill="#0284c7">Smooth Water Mirror Surface</text>
+              </svg>
+            </div>
+            <h3 class="physics-title">Specular Reflection (Open Water)</h3>
+            <p class="physics-mechanism">
+              <strong>Mechanism:</strong> Calm water surfaces act as smooth electromagnetic mirrors for 24 cm microwaves. Energy reflects forward at the specular angle away from the radar antenna.
+            </p>
+            <div class="physics-metric-row">
+              <span class="physics-metric-lbl">Signature:</span>
+              <span class="physics-metric-val">γ⁰<sub>HH</sub> &lt; −16 dB • γ⁰<sub>HV</sub> &lt; −22 dB</span>
+            </div>
+            <p class="physics-ground"><strong>Observed Feature:</strong> River channels, flooded chars, permanent lakes appear dark black/blue.</p>
+          </div>
+
+          <div class="physics-card">
+            <div class="physics-diagram-box">
+              <svg viewBox="0 0 320 130" width="100%" height="100%" aria-hidden="true">
+                <!-- Double bounce rays -->
+                <line x1="20" y1="20" x2="140" y2="105" stroke="#0b3d91" stroke-width="2.5" stroke-dasharray="4 2"/>
+                <line x1="140" y1="105" x2="190" y2="55" stroke="#047857" stroke-width="2.5"/>
+                <line x1="190" y1="55" x2="40" y2="10" stroke="#047857" stroke-width="2.5"/>
+                <polygon points="46,14 40,10 44,18" fill="#047857"/>
+                <!-- Water and vertical stalk -->
+                <line x1="10" y1="105" x2="310" y2="105" stroke="#0284c7" stroke-width="3"/>
+                <rect x="188" y="30" width="5" height="75" rx="2" fill="#047857"/>
+                <line x1="180" y1="45" x2="198" y2="35" stroke="#047857" stroke-width="2"/>
+                <line x1="180" y1="65" x2="202" y2="55" stroke="#047857" stroke-width="2"/>
+                <!-- Labels -->
+                <text x="25" y="45" font-family="monospace" font-size="10" fill="#0b3d91">Incident</text>
+                <text x="50" y="24" font-family="monospace" font-size="10" fill="#047857">180° Direct Echo</text>
+                <text x="200" y="45" font-family="sans-serif" font-size="10" font-weight="600" fill="#047857">Plant Stem / Wall</text>
+                <text x="95" y="122" font-family="sans-serif" font-size="10" font-weight="600" fill="#0284c7">Reflective Water Base</text>
+              </svg>
+            </div>
+            <h3 class="physics-title">Dihedral Double-Bounce (Flooded Vegetation)</h3>
+            <p class="physics-mechanism">
+              <strong>Mechanism:</strong> L-band waves penetrate outer foliage, bounce off flat water onto vertical stems, and reflect directly back to the sensor like a corner cube reflector.
+            </p>
+            <div class="physics-metric-row">
+              <span class="physics-metric-lbl">Signature:</span>
+              <span class="physics-metric-val">γ⁰<sub>HH</sub> &gt; −7.5 dB • HH − HV &gt; 6.5 dB</span>
+            </div>
+            <p class="physics-ground"><strong>Observed Feature:</strong> Inundated rice fields, wetland reeds, and flooded villages glow vivid emerald green.</p>
+          </div>
+
+          <div class="physics-card">
+            <div class="physics-diagram-box">
+              <svg viewBox="0 0 320 130" width="100%" height="100%" aria-hidden="true">
+                <!-- Volume scatter rays -->
+                <line x1="30" y1="20" x2="140" y2="60" stroke="#0b3d91" stroke-width="2.5" stroke-dasharray="4 2"/>
+                <!-- Scattered mini rays -->
+                <line x1="140" y1="60" x2="165" y2="40" stroke="#b45309" stroke-width="1.8"/>
+                <line x1="165" y1="40" x2="185" y2="65" stroke="#b45309" stroke-width="1.8"/>
+                <line x1="185" y1="65" x2="120" y2="25" stroke="#b45309" stroke-width="2"/>
+                <polygon points="126,27 120,25 124,32" fill="#b45309"/>
+                <line x1="165" y1="40" x2="220" y2="30" stroke="#94a3b8" stroke-width="1.5"/>
+                <!-- Foliage blobs -->
+                <circle cx="165" cy="55" r="28" fill="rgba(180, 83, 9, 0.08)" stroke="#b45309" stroke-width="1.5" stroke-dasharray="3 3"/>
+                <!-- Labels -->
+                <text x="35" y="35" font-family="monospace" font-size="10" fill="#0b3d91">H-Transmit</text>
+                <text x="120" y="16" font-family="monospace" font-size="10" fill="#b45309">V-Depolarized Echo</text>
+                <text x="135" y="105" font-family="sans-serif" font-size="10" font-weight="600" fill="#b45309">Random Canopy Elements</text>
+              </svg>
+            </div>
+            <h3 class="physics-title">Volume Depolarization (Canopy &amp; Crops)</h3>
+            <p class="physics-mechanism">
+              <strong>Mechanism:</strong> Multiple randomized refractions within randomly oriented leaves and stems rotate the wave polarization plane from horizontal (H) to vertical (V).
+            </p>
+            <div class="physics-metric-row">
+              <span class="physics-metric-lbl">Signature:</span>
+              <span class="physics-metric-val">γ⁰<sub>HV</sub> −14 to −10 dB • Elevated HV/HH</span>
+            </div>
+            <p class="physics-ground"><strong>Observed Feature:</strong> Mature Aman rice canopy, orchards, homestead bamboo groves.</p>
+          </div>
+        </div>
       </div>
 
-      <div class="beats-grid">
-        <div class="beat-card" data-beat="0">
-          <div>
-            <div class="beat-step">
-              <span class="beat-number">01</span>
-              <span class="beat-tag">SAR RGB • PEAK MONSOON</span>
-            </div>
-            <h3>Radar Pierces the Monsoon Clouds</h3>
-            <p>While optical sensors see 90%+ cloud cover from June to September, NISAR's active 1.25 GHz microwave pulses illuminate the Jamuna and Haor basins day or night without weather loss.</p>
-          </div>
-          <div class="beat-footer">
-            <span>Layer: Dual-Pol SAR RGB</span>
-            <span>Explore →</span>
-          </div>
-        </div>
-
-        <div class="beat-card" data-beat="1">
-          <div>
-            <div class="beat-step">
-              <span class="beat-number">02</span>
-              <span class="beat-tag">SPECULAR SCATTER</span>
-            </div>
-            <h3>Calm Water Mirrors Into Darkness</h3>
-            <p>Smooth open floodwaters reflect microwave pulses away from the satellite like a mirror, dropping co-polarized γ⁰ HH below −15.5 dB and HV below −21.5 dB.</p>
-          </div>
-          <div class="beat-footer">
-            <span>Layer: Water &amp; Flood Mask</span>
-            <span>Explore →</span>
-          </div>
-        </div>
-
-        <div class="beat-card" data-beat="2">
-          <div>
-            <div class="beat-step">
-              <span class="beat-number">03</span>
-              <span class="beat-tag">L-BAND DOUBLE BOUNCE</span>
-            </div>
-            <h3>Flooded Vegetation Rings Bright</h3>
-            <p>Unlike 5.6 cm C-band radar, NISAR's 24 cm L-band penetrates emergent stems and bounces off water beneath—creating a corner-reflector surge in HH (&gt; −7.5 dB) with high HH/HV ratio.</p>
-          </div>
-          <div class="beat-footer">
-            <span>Layer: Flooded Vegetation</span>
-            <span>Explore →</span>
-          </div>
-        </div>
-
-        <div class="beat-card" data-beat="3">
-          <div>
-            <div class="beat-step">
-              <span class="beat-number">04</span>
-              <span class="beat-tag">12-PASS RECURRENCE</span>
-            </div>
-            <h3>Sandbar Births &amp; Bank Shift</h3>
-            <p>Tracking inundation frequency across all 12 NISAR passes alongside the 38-year JRC Global Surface Water baseline reveals where braided river channels erode banks and deposit new char islands.</p>
-          </div>
-          <div class="beat-footer">
-            <span>Layer: Water Recurrence %</span>
-            <span>Explore →</span>
-          </div>
-        </div>
-
-        <div class="beat-card" data-beat="4">
-          <div>
-            <div class="beat-step">
-              <span class="beat-number">05</span>
-              <span class="beat-tag">WORLDCOVER CROPLAND</span>
-            </div>
-            <h3>The Rhythm of Paddy Fields</h3>
-            <p>Across ESA WorldCover cropland pixels, cross-polarized HV backscatter tracks the vegetative cycle from flooded transplanting (dark) to dense vegetative canopy (bright volume scatter).</p>
-          </div>
-          <div class="beat-footer">
-            <span>Layer: Paddy Rhythm (K=4)</span>
-            <span>Explore →</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Scattering Physics Visual Cards -->
-      <div class="section-heading-row">
-        <div>
-          <h2 class="section-title">How NISAR L-Band Radar Reads Earth's Surface Dance</h2>
-          <p class="section-subtitle">Physical interpretation of dual-polarization covariance terms (HHHH &amp; HVHV) in NISAR L2 GCOV products.</p>
-        </div>
-        <span class="badge badge-gold">RADAR SCATTERING PHYSICS</span>
-      </div>
-
-      <div class="physics-grid">
-        <div class="physics-card">
-          <h4><span class="badge badge-cyan">01</span> Specular Reflection (Open Water)</h4>
-          <p><strong>Mechanism:</strong> Smooth water acts as a specular mirror for 24 cm microwaves, reflecting energy away from the side-looking radar antenna (<code>33°–47°</code> incidence angle).</p>
-          <p><strong>NISAR Signature:</strong> Very low backscatter in both channels (γ⁰<sub>HH</sub> ≈ −16 to −24 dB, γ⁰<sub>HV</sub> ≈ −22 to −28 dB). Appears deep blue/black in false-color composites.</p>
-        </div>
-
-        <div class="physics-card">
-          <h4><span class="badge badge-gold">02</span> Dihedral Double-Bounce (Flooded Stems &amp; Settlements)</h4>
-          <p><strong>Mechanism:</strong> L-band waves penetrate upper foliage, reflect off the horizontal water surface onto vertical rice/wetland stems (or building walls), and return strongly toward the radar.</p>
-          <p><strong>NISAR Signature:</strong> Strong co-polarized surge (γ⁰<sub>HH</sub> &gt; −7.5 dB) with a large polarization difference (HH − HV &gt; 6.5 dB). Highlighted in emerald green on our Flood Dynamics map.</p>
-        </div>
-
-        <div class="physics-card">
-          <h4><span class="badge badge-emerald">03</span> Volume Depolarization (Crop &amp; Forest Canopy)</h4>
-          <p><strong>Mechanism:</strong> Multiple scattering inside randomly oriented leaves, twigs, and crop stems depolarizes the radar wave, converting horizontal transmit pulses (H) into vertical receive echoes (V).</p>
-          <p><strong>NISAR Signature:</strong> Elevated cross-pol γ⁰<sub>HV</sub> (−14 to −10 dB) and high HV/HH ratio. Drives our unsupervised paddy phenology clustering across cropland.</p>
-        </div>
-      </div>
+    </div>
+  </section>
     </div>
   </section>
 
   <!-- ====================================================================
-       VIEW 02: INTERACTIVE RADAR EXPLORER (3-COLUMN MISSION CONTROL)
+       VIEW 02: INTERACTIVE RADAR EXPLORER (3-COLUMN DOCK & STAGE)
        ==================================================================== -->
   <section id="view-explorer" class="view-section">
     <div class="explorer-shell">
 
-      <!-- LEFT DOCK: TIMELINE, LAYERS, SWIPE, KPIs -->
+      <!-- LEFT DOCK: TIMELINE, LAYERS, SWIPE, OPACITY, KPIS -->
       <aside class="panel-left">
         <!-- 1. NISAR Acquisition Timeline -->
         <div class="control-card">
           <div class="card-title-row">
             <span class="card-title">1. NISAR L2 GCOV Timeline</span>
-            <span class="badge badge-emerald" id="granule-badge">PR_GCOV</span>
+            <span class="card-meta" id="granule-badge">PR_GCOV</span>
           </div>
           <div class="date-readout-banner">
             <div>
@@ -259,9 +366,16 @@
 
           <div class="transport-row">
             <div class="transport-btns">
-              <button id="btn-prev" class="icon-btn" title="Previous NISAR Pass">◀</button>
-              <button id="btn-play" class="icon-btn" title="Animate 12-Pass Monsoon Cycle">▶ Play</button>
-              <button id="btn-next" class="icon-btn" title="Next NISAR Pass">▶</button>
+              <button id="btn-prev" class="icon-btn" title="Previous NISAR Pass">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5" stroke="currentColor" stroke-width="2"/></svg>
+              </button>
+              <button id="btn-play" class="icon-btn" title="Animate 12-Pass Monsoon Cycle">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <span>Play</span>
+              </button>
+              <button id="btn-next" class="icon-btn" title="Next NISAR Pass">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2"/></svg>
+              </button>
             </div>
             <select id="speed-select" class="select-input" aria-label="Animation speed">
               <option value="1200">1.0× Speed</option>
@@ -275,7 +389,7 @@
         <div class="control-card">
           <div class="card-title-row">
             <span class="card-title">2. Geospatial Layer Stack</span>
-            <span class="badge badge-cyan">8 REAL LAYERS</span>
+            <span class="card-meta">8 Layers</span>
           </div>
           <div class="layer-list" id="layer-list">
             <label class="layer-option active" data-layer="rgb">
@@ -341,9 +455,9 @@
         <div class="control-card">
           <div class="card-title-row">
             <span class="card-title">3. Before / After Split Swipe</span>
-            <label style="display:inline-flex;align-items:center;gap:5px;font-size:0.72rem;color:var(--gold-400);cursor:pointer;font-weight:700;">
-              <input type="checkbox" id="swipe-toggle" style="accent-color:var(--gold-400);" />
-              Enable Split
+            <label style="display:inline-flex;align-items:center;gap:5px;font-size:0.72rem;color:var(--nasa-blue);cursor:pointer;font-weight:700;">
+              <input type="checkbox" id="swipe-toggle" style="accent-color:var(--nasa-blue);" />
+              <span>Enable Split</span>
             </label>
           </div>
           <div id="swipe-controls-box" style="display:none;flex-direction:column;gap:8px;">
@@ -365,7 +479,7 @@
               <input type="range" id="swipe-slider" class="range-slider" min="5" max="95" value="50" />
             </div>
           </div>
-          <p id="swipe-hint-text" style="font-size:0.7rem;color:var(--text-muted);">
+          <p id="swipe-hint-text" style="font-size:0.68rem;color:var(--text-muted);">
             Compare any two NISAR acquisition dates side-by-side (e.g., June onset vs. August peak flood).
           </p>
         </div>
@@ -373,16 +487,16 @@
         <!-- 4. Basemap & Opacity -->
         <div class="control-card">
           <div class="card-title-row">
-            <span class="card-title">4. Basemap &amp; Overlay Opacity</span>
-            <span id="opacity-val" style="font-family:var(--font-mono);font-size:0.72rem;color:var(--gold-400);">90%</span>
+            <span class="card-title">4. Basemap &amp; Opacity</span>
+            <span id="opacity-val" style="font-family:var(--font-mono);font-size:0.72rem;color:var(--nasa-blue);">90%</span>
           </div>
           <div class="pill-group" style="margin-bottom:8px;">
-            <button class="pill-btn active" data-base="dark">Dark Radar</button>
+            <button class="pill-btn active" data-base="dark">Research Carto</button>
             <button class="pill-btn" data-base="sat">ESRI Optical</button>
             <button class="pill-btn" data-base="osm">Terrain Map</button>
           </div>
           <input type="range" id="opacity-slider" class="range-slider" min="15" max="100" value="90" aria-label="Overlay opacity" />
-          <div id="transect-toggle-row" style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;font-size:0.74rem;color:var(--text-secondary);">
+          <div id="transect-toggle-row" style="margin-top:6px;display:flex;align-items:center;justify-content:space-between;font-size:0.72rem;color:var(--text-secondary);">
             <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">
               <input type="checkbox" id="chk-transects" checked style="accent-color:var(--cyan-400);" />
               <span>Show Braided Channel Transects (T1–T3)</span>
@@ -393,8 +507,8 @@
         <!-- 5. Live Scene Telemetry KPIs -->
         <div class="control-card">
           <div class="card-title-row">
-            <span class="card-title">5. Scene Telemetry (Active Date)</span>
-            <span class="badge badge-gold" id="kpi-date-tag">2026-06-18</span>
+            <span class="card-title">5. Scene Telemetry</span>
+            <span class="card-meta" id="kpi-date-tag">2026-06-18</span>
           </div>
           <div class="kpi-grid-2">
             <div class="kpi-mini">
@@ -422,25 +536,28 @@
         <div id="map"></div>
 
         <div class="map-top-banner" id="map-status-pill">
-          <span>📍 Click any golden landmark pin (or choose a chip on the right) to inspect its 12-pass NISAR time series &amp; Change Radio</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--nasa-blue);flex-shrink:0;"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/></svg>
+          <span>Click any landmark pin (or choose a chip on the right) to inspect its 12-pass NISAR time series &amp; Change Radio</span>
         </div>
 
         <div id="swipe-divider" class="swipe-divider-line">
-          <div class="swipe-divider-handle">⇔</div>
+          <div class="swipe-divider-handle">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/><polyline points="9 18 3 12 9 6"/><polyline points="15 6 21 12 15 18"/></svg>
+          </div>
         </div>
 
         <div class="map-legend-floating" id="map-legend">
           <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer;" id="legend-header-toggle">
-            <div style="font-size:0.72rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;color:#ffffff;" id="legend-title">
+            <div style="font-family:var(--font-mono);font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-primary);" id="legend-title">
               NISAR Dual-Pol SAR Composite
             </div>
-            <span id="legend-collapse-icon" style="font-size:0.72rem;color:var(--gold-400);">▾</span>
+            <span id="legend-collapse-icon" style="font-size:0.68rem;color:var(--text-muted);">▾</span>
           </div>
           <div id="legend-content"></div>
         </div>
 
         <div class="map-cursor-hud" id="map-cursor-hud">
-          <span style="color:var(--gold-400);">RADAR CURSOR:</span> Hover or click map to inspect 80m pixel telemetry
+          <span style="color:var(--nasa-blue);">RADAR CURSOR:</span> Hover or click map to inspect 80m pixel telemetry
         </div>
       </main>
 
@@ -450,7 +567,7 @@
         <div class="control-card">
           <div class="card-title-row">
             <span class="card-title">Verified Delta Landmarks (6 Pins)</span>
-            <span class="badge badge-gold">REAL PIXELS</span>
+            <span class="card-meta">Ground Truth</span>
           </div>
           <div class="landmark-chips" id="landmark-chips"></div>
         </div>
@@ -459,10 +576,10 @@
         <div class="control-card">
           <div class="card-title-row">
             <div>
-              <div style="font-size:0.9rem;font-weight:800;color:#ffffff;" id="pin-title">Select a Landmark</div>
-              <div style="font-family:var(--font-mono);font-size:0.68rem;color:var(--text-muted);" id="pin-coords">--°N, --°E • WorldCover: --</div>
+              <div style="font-size:0.86rem;font-weight:800;color:var(--text-primary);" id="pin-title">Select a Landmark</div>
+              <div style="font-family:var(--font-mono);font-size:0.66rem;color:var(--text-muted);" id="pin-coords">--°N, --°E • WorldCover: --</div>
             </div>
-            <span class="badge badge-cyan" id="pin-badge">PIN #1</span>
+            <span class="card-meta" id="pin-badge">PIN #1</span>
           </div>
           <div class="chart-stage">
             <canvas id="ts-chart"></canvas>
@@ -472,19 +589,21 @@
         <!-- 3. Change Radio — Backscatter Sonification -->
         <div class="change-radio-box">
           <div class="card-title-row" style="margin-bottom:6px;">
-            <div style="display:flex;align-items:center;gap:8px;">
-              <span class="card-title" style="color:var(--cyan-400);">🔊 Change Radio (Sonification)</span>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span class="card-title" style="color:var(--cyan-400);">Change Radio (Sonification)</span>
               <div class="eq-bars" id="radio-eq" aria-hidden="true">
                 <span></span><span></span><span></span><span></span>
               </div>
             </div>
-            <div style="display:flex;gap:5px;">
-              <button id="btn-radio-toggle" class="icon-btn" style="padding:4px 10px;font-size:0.72rem;">▶ Listen</button>
-              <button id="btn-radio-mute" class="icon-btn" style="padding:4px 8px;font-size:0.72rem;" title="Mute / Unmute Audio">🔊</button>
+            <div style="display:flex;gap:4px;">
+              <button id="btn-radio-toggle" class="icon-btn" style="padding:3px 8px;font-size:0.68rem;">Play</button>
+              <button id="btn-radio-mute" class="icon-btn" style="padding:3px 6px;font-size:0.68rem;" title="Mute / Unmute Audio">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              </button>
             </div>
           </div>
-          <p style="font-size:0.72rem;color:var(--text-secondary);line-height:1.45;">
-            Maps cross-pol <strong>γ⁰ HV (dB)</strong> to a C-major pentatonic pitch (<code>196–659 Hz</code>), <strong>HH−HV</strong> to harmonic filter brightness, and flood state (<code>water_class &gt; 0</code>) to a <code>65 Hz</code> sub-bass pulse.
+          <p style="font-size:0.69rem;color:var(--text-muted);line-height:1.42;">
+            Maps cross-pol <strong>γ⁰ HV (dB)</strong> to C-major pentatonic pitch (<code>196–659 Hz</code>), <strong>HH−HV</strong> to harmonic filter brightness, and flood state (<code>water_class &gt; 0</code>) to <code>65 Hz</code> sub-bass pulse.
           </p>
           <div class="radio-telemetry-strip">
             <div class="radio-cell">
@@ -500,8 +619,8 @@
               <div class="radio-cell-val" id="radio-flood-bass">OFF (Dry)</div>
             </div>
           </div>
-          <div id="radio-caption" style="margin-top:8px;font-family:var(--font-mono);font-size:0.68rem;color:var(--gold-300);background:rgba(5,11,20,0.65);padding:6px 8px;border-radius:6px;border:1px solid var(--border-subtle);" aria-live="polite">
-            [Accessible Audio Caption] Ready: Click "▶ Listen" to hear the 12-pass radar backscatter symphony at this location.
+          <div id="radio-caption" style="margin-top:6px;font-family:var(--font-mono);font-size:0.65rem;color:var(--text-secondary);background:var(--surface-input);padding:5px 7px;border-radius:var(--radius-sm);border:1px solid var(--border-subtle);" aria-live="polite">
+            [Accessible Audio Caption] Ready: Click "Play" to hear the 12-pass radar backscatter symphony at this location.
           </div>
         </div>
 
@@ -509,9 +628,9 @@
         <div class="control-card">
           <div class="card-title-row">
             <span class="card-title">Physical Radar Diagnostics</span>
-            <span class="badge badge-emerald" id="pin-state-badge">CALIBRATED</span>
+            <span class="card-meta" id="pin-state-badge">CALIBRATED</span>
           </div>
-          <div id="pin-explanation" style="font-size:0.78rem;color:var(--text-secondary);line-height:1.58;"></div>
+          <div id="pin-explanation" style="font-size:0.75rem;color:var(--text-secondary);line-height:1.55;"></div>
         </div>
       </aside>
     </div>
@@ -524,7 +643,6 @@
     <div class="page-container">
       <div class="section-heading-row">
         <div>
-          <span class="badge badge-gold" style="margin-bottom:6px;">STAGE 3 • AGRICULTURAL PHENOLOGY HYPOTHESIS</span>
           <h2 class="section-title">Unsupervised Paddy Phenology Clustering (K = 4) on Real ESA WorldCover Cropland</h2>
           <p class="section-subtitle">
             Strictly masked to real <strong>ESA WorldCover 10m Cropland (Class 40)</strong> pixels (<code>914.5 km²</code> in Jamuna; <code>822.4 km²</code> in Haor) and excluding permanent rivers (<code>JRC &lt; 50%</code>).
@@ -534,25 +652,25 @@
       </div>
 
       <!-- 4 Cluster Summary Cards -->
-      <div class="grid-4" id="paddy-cluster-cards" style="margin-bottom:24px;"></div>
+      <div class="grid-4" id="paddy-cluster-cards" style="margin-bottom:20px;"></div>
 
       <!-- Dual Centroid Trajectory Charts -->
-      <div class="grid-2" style="margin-bottom:24px;">
+      <div class="grid-2" style="margin-bottom:20px;">
         <div class="surface-card">
           <div class="card-title-row">
             <span class="card-title">Cross-Pol γ⁰ HV (dB) Centroid Trajectories (Canopy Volume Scatter)</span>
-            <span class="badge badge-cyan">12 PASSES</span>
+            <span class="card-meta">12 Passes</span>
           </div>
-          <div style="height:290px;position:relative;">
+          <div style="height:270px;position:relative;">
             <canvas id="paddy-hv-chart"></canvas>
           </div>
         </div>
         <div class="surface-card">
           <div class="card-title-row">
             <span class="card-title">Co-Pol γ⁰ HH (dB) Centroid Trajectories (Flooding &amp; Double-Bounce)</span>
-            <span class="badge badge-gold">12 PASSES</span>
+            <span class="card-meta">12 Passes</span>
           </div>
-          <div style="height:290px;position:relative;">
+          <div style="height:270px;position:relative;">
             <canvas id="paddy-hh-chart"></canvas>
           </div>
         </div>
@@ -561,23 +679,26 @@
       <!-- Scientific Caveat & Physical Drivers -->
       <div class="grid-2">
         <div class="surface-card">
-          <h3 style="font-size:1.05rem;font-weight:800;color:#ffffff;margin-bottom:10px;">Physical Drivers Behind the 4 Radar Signatures</h3>
-          <p style="font-size:0.84rem;color:var(--text-secondary);line-height:1.65;margin-bottom:10px;">
+          <h3 style="font-size:0.98rem;font-weight:800;color:var(--text-primary);margin-bottom:8px;">Physical Drivers Behind the 4 Radar Signatures</h3>
+          <p style="font-size:0.8rem;color:var(--text-secondary);line-height:1.6;margin-bottom:8px;">
             In Bangladesh's floodplain and haor agro-ecosystems, agricultural fields experience dramatic moisture and structural shifts between June and November:
           </p>
-          <ul style="font-size:0.82rem;color:var(--text-secondary);line-height:1.65;padding-left:18px;">
+          <ul style="font-size:0.78rem;color:var(--text-secondary);line-height:1.6;padding-left:16px;">
             <li><strong>Pondering / Agronomic Flooding:</strong> Prior to T. Aman transplanting—or when monsoon waters overtop low-lying boro fields—smooth water surfaces cause a sharp drop in both γ⁰<sub>HH</sub> and γ⁰<sub>HV</sub> (−18 to −22 dB).</li>
             <li><strong>Vegetative Tillering &amp; Stem Elongation:</strong> As rice tillers emerge above standing water, 24 cm L-band waves experience stem-water dihedral double-bounce (γ⁰<sub>HH</sub> spikes) followed by progressive cross-pol volume scattering (γ⁰<sub>HV</sub> rises by +4 to +6 dB).</li>
             <li><strong>Senescence &amp; Post-Monsoon Recession:</strong> As water drains in October–November and crops mature/harvest, soil roughness and dry stubble dominate the return.</li>
           </ul>
         </div>
 
-        <div class="surface-card" style="border-color:rgba(245,158,11,0.45);">
-          <h3 style="font-size:1.05rem;font-weight:800;color:var(--gold-400);margin-bottom:10px;">⚠️ Scientific Honesty: Why This is a Physical Hypothesis</h3>
-          <p style="font-size:0.84rem;color:var(--text-secondary);line-height:1.65;margin-bottom:12px;">
+        <div class="surface-card">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold-400);"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <h3 style="font-size:0.98rem;font-weight:800;color:var(--text-primary);">Scientific Honesty: Why This is a Physical Hypothesis</h3>
+          </div>
+          <p style="font-size:0.8rem;color:var(--text-secondary);line-height:1.6;margin-bottom:10px;">
             In accordance with NASA remote sensing standards, our K=4 trajectory map is presented explicitly as an <strong>unsupervised radar backscatter hypothesis</strong> rather than a supervised crop-type census:
           </p>
-          <ul style="font-size:0.82rem;color:var(--text-secondary);line-height:1.65;padding-left:18px;">
+          <ul style="font-size:0.78rem;color:var(--text-secondary);line-height:1.6;padding-left:16px;">
             <li><strong>Single-Season Provisional Window:</strong> NISAR entered its Provisional Calibrated science phase on <strong>June 17, 2026</strong>. The 12-pass window (<code>2026-06-18</code> to <code>2026-11-09</code>) captures the Kharif-II / Aman monsoon season, whereas a complete Boro–Aus–Aman cycle requires a full 12-month archive.</li>
             <li><strong>No Field-Survey Ground Truth:</strong> While strictly constrained to real <strong>ESA WorldCover 10m Cropland (class 40)</strong>, distinguishing specific rice cultivars from jute or wet fallow requires in-situ DAE plot surveys.</li>
           </ul>
@@ -593,7 +714,6 @@
     <div class="page-container">
       <div class="section-heading-row">
         <div>
-          <span class="badge badge-emerald" style="margin-bottom:6px;">STAGES 4 &amp; 5 • HUMAN EXPOSURE &amp; INDEPENDENT SENSOR VALIDATION</span>
           <h2 class="section-title">Monsoon Population Exposure, Cropland Inundation &amp; Multi-Sensor Validation</h2>
           <p class="section-subtitle">
             Cross-tabulating real NISAR flood extents with <strong>WorldPop 100m UN-Adjusted Population</strong>, <strong>ESA WorldCover 10m</strong>, and <strong>geoBoundaries ADM2/ADM3</strong>, validated against <strong>Sentinel-1 C-Band RTC</strong> and <strong>Sentinel-2 Optical NDWI</strong>.
@@ -602,37 +722,37 @@
       </div>
 
       <!-- Peak Impact KPI Strip -->
-      <div class="grid-4" style="margin-bottom:24px;">
+      <div class="grid-4" style="margin-bottom:20px;">
         <div class="surface-card">
           <div class="telemetry-stat-label">Peak Monsoon Inundation</div>
-          <div class="telemetry-stat-val" id="imp-peak-water" style="color:var(--cyan-400);font-size:1.5rem;">-- km²</div>
+          <div class="telemetry-stat-val" id="imp-peak-water" style="color:var(--cyan-400);font-size:1.35rem;">-- km²</div>
           <div class="telemetry-stat-sub" id="imp-peak-water-sub">--% of 1,677.7 km² AOI</div>
         </div>
         <div class="surface-card">
           <div class="telemetry-stat-label">Peak Exposed Population</div>
-          <div class="telemetry-stat-val" id="imp-peak-pop" style="color:var(--gold-400);font-size:1.5rem;">--</div>
+          <div class="telemetry-stat-val" id="imp-peak-pop" style="color:var(--gold-400);font-size:1.35rem;">--</div>
           <div class="telemetry-stat-sub" id="imp-peak-pop-sub">Uncertainty band (±15%): --</div>
         </div>
         <div class="surface-card">
           <div class="telemetry-stat-label">Peak Flooded Cropland</div>
-          <div class="telemetry-stat-val" id="imp-peak-crop" style="color:var(--emerald-400);font-size:1.5rem;">-- ha</div>
+          <div class="telemetry-stat-val" id="imp-peak-crop" style="color:var(--emerald-400);font-size:1.35rem;">-- ha</div>
           <div class="telemetry-stat-sub" id="imp-peak-crop-sub">ESA WorldCover Class 40</div>
         </div>
         <div class="surface-card">
           <div class="telemetry-stat-label">Intersecting Upazilas (ADM3)</div>
-          <div class="telemetry-stat-val" id="imp-upazila-count" style="color:#ffffff;font-size:1.5rem;">-- Upazilas</div>
+          <div class="telemetry-stat-val" id="imp-upazila-count" style="color:var(--text-primary);font-size:1.35rem;">-- Upazilas</div>
           <div class="telemetry-stat-sub" id="imp-district-sub">Real geoBoundaries ADM2/ADM3</div>
         </div>
       </div>
 
       <!-- Time-Series Chart + Upazila Ranking Table -->
-      <div class="grid-2" style="margin-bottom:28px;">
+      <div class="grid-2" style="margin-bottom:24px;">
         <div class="surface-card">
           <div class="card-title-row">
             <span class="card-title">12-Pass Flood Area (km²) vs. Exposed Population (WorldPop ±15%)</span>
-            <span class="badge badge-gold">REAL ZONAL STATS</span>
+            <span class="card-meta">Zonal Statistics</span>
           </div>
-          <div style="height:320px;position:relative;">
+          <div style="height:300px;position:relative;">
             <canvas id="impact-ts-chart"></canvas>
           </div>
         </div>
@@ -640,9 +760,9 @@
         <div class="surface-card">
           <div class="card-title-row">
             <span class="card-title">Most Exposed Upazilas (ADM3) &amp; Districts (ADM2) at Peak Flood</span>
-            <span class="badge badge-cyan" id="imp-table-date-badge">PEAK DATE</span>
+            <span class="card-meta" id="imp-table-date-badge">PEAK DATE</span>
           </div>
-          <div class="data-table-wrap" style="max-height:320px;overflow-y:auto;">
+          <div class="data-table-wrap" style="max-height:300px;overflow-y:auto;">
             <table class="data-table">
               <thead>
                 <tr>
@@ -665,19 +785,18 @@
           <h2 class="section-title">Independent Multi-Sensor Validation (NISAR L-Band vs. Sentinel-1 C-Band &amp; Sentinel-2 Optical)</h2>
           <p class="section-subtitle">Quantitative pixel-by-pixel confusion matrix metrics across <code>512 × 512</code> (<code>262,144</code> pixels = <code>1,677.7 km²</code>) per AOI.</p>
         </div>
-        <span class="badge badge-emerald">100% REAL SENSOR COGs</span>
       </div>
 
       <div class="grid-2">
         <div class="surface-card">
           <div class="card-title-row">
             <span class="card-title">1. Radar-to-Radar: NISAR L-Band (24 cm) vs. Sentinel-1 C-Band RTC (5.6 cm)</span>
-            <span class="badge badge-gold" id="val-s1-date-badge">2026-07-24 vs 2026-07-25</span>
+            <span class="card-meta" id="val-s1-date-badge">2026-07-24 vs 2026-07-25</span>
           </div>
-          <p style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:14px;" id="val-s1-scene-desc">
+          <p style="font-size:0.78rem;color:var(--text-secondary);margin-bottom:12px;" id="val-s1-scene-desc">
             Compares NISAR L2 GCOV open-water masks against temporally co-located Copernicus Sentinel-1 C-band Radiometrically Terrain Corrected (γ⁰ VV/VH) observations.
           </p>
-          <div class="grid-4" style="margin-bottom:14px;">
+          <div class="grid-4" style="margin-bottom:12px;">
             <div class="kpi-mini">
               <div class="kpi-mini-label">Overall Accuracy</div>
               <div class="kpi-mini-val" id="val-s1-acc" style="color:var(--emerald-400);">--%</div>
@@ -692,22 +811,22 @@
             </div>
             <div class="kpi-mini">
               <div class="kpi-mini-label">Precision / Recall</div>
-              <div class="kpi-mini-val" id="val-s1-pr" style="font-size:0.88rem;">-- / --</div>
+              <div class="kpi-mini-val" id="val-s1-pr" style="font-size:0.82rem;">-- / --</div>
             </div>
           </div>
-          <div style="font-size:0.78rem;color:var(--text-secondary);background:var(--bg-deep);padding:10px 12px;border-radius:8px;border:1px solid var(--border-subtle);margin-bottom:12px;" id="val-s1-physics-note"></div>
-          <button class="btn btn-outline" id="btn-inspect-s1" style="width:100%;padding:8px;">View Real Sentinel-1 C-Band RTC Layer on Map →</button>
+          <div style="font-size:0.75rem;color:var(--text-secondary);background:var(--surface-input);padding:8px 10px;border-radius:var(--radius-sm);border:1px solid var(--border-subtle);margin-bottom:10px;" id="val-s1-physics-note"></div>
+          <button class="btn btn-outline" id="btn-inspect-s1" style="width:100%;padding:7px;">View Real Sentinel-1 C-Band RTC Layer on Map →</button>
         </div>
 
         <div class="surface-card">
           <div class="card-title-row">
             <span class="card-title">2. Radar-to-Optical: NISAR L-Band (2026-11-09) vs. Sentinel-2 L2A Optical NDWI</span>
-            <span class="badge badge-cyan" id="val-s2-date-badge">2026-11-09 / 13</span>
+            <span class="card-meta" id="val-s2-date-badge">2026-11-09 / 13</span>
           </div>
-          <p style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:14px;" id="val-s2-scene-desc">
+          <p style="font-size:0.78rem;color:var(--text-secondary);margin-bottom:12px;" id="val-s2-scene-desc">
             Compares post-monsoon NISAR L-band water delineation against cloud-free Sentinel-2 Multispectral Instrument (MSI) Normalized Difference Water Index (NDWI = (Green − NIR) / (Green + NIR)).
           </p>
-          <div class="grid-4" style="margin-bottom:14px;">
+          <div class="grid-4" style="margin-bottom:12px;">
             <div class="kpi-mini">
               <div class="kpi-mini-label">Overall Accuracy</div>
               <div class="kpi-mini-val" id="val-s2-acc" style="color:var(--emerald-400);">--%</div>
@@ -722,22 +841,21 @@
             </div>
             <div class="kpi-mini">
               <div class="kpi-mini-label">Precision / Recall</div>
-              <div class="kpi-mini-val" id="val-s2-pr" style="font-size:0.88rem;">-- / --</div>
+              <div class="kpi-mini-val" id="val-s2-pr" style="font-size:0.82rem;">-- / --</div>
             </div>
           </div>
-          <div style="font-size:0.78rem;color:var(--text-secondary);background:var(--bg-deep);padding:10px 12px;border-radius:8px;border:1px solid var(--border-subtle);margin-bottom:12px;" id="val-s2-physics-note"></div>
-          <button class="btn btn-outline" id="btn-inspect-s2" style="width:100%;padding:8px;">View Real Sentinel-2 Optical + NDWI Layer on Map →</button>
+          <div style="font-size:0.75rem;color:var(--text-secondary);background:var(--surface-input);padding:8px 10px;border-radius:var(--radius-sm);border:1px solid var(--border-subtle);margin-bottom:10px;" id="val-s2-physics-note"></div>
+          <button class="btn btn-outline" id="btn-inspect-s2" style="width:100%;padding:7px;">View Real Sentinel-2 Optical + NDWI Layer on Map →</button>
         </div>
       </div>
 
       <!-- Braided River Morphodynamics & Char Emergence Section (Jamuna Transects T1-T3) -->
-      <div id="jamuna-transect-section" style="margin-top:28px;">
+      <div id="jamuna-transect-section" style="margin-top:24px;">
         <div class="section-heading-row">
           <div>
             <h2 class="section-title">Braided River Morphodynamics &amp; Char Sandbar Emergence (Jamuna Transects T1–T3)</h2>
             <p class="section-subtitle">Measured directly across the 80 m NISAR water masks from early monsoon (June 18) to peak flood (July 24) and post-monsoon recession (November 9).</p>
           </div>
-          <span class="badge badge-cyan">80M TRANSECT TELEMETRY</span>
         </div>
         <div class="grid-3" id="transect-cards-grid"></div>
       </div>
@@ -745,91 +863,305 @@
   </section>
 
   <!-- ====================================================================
-       VIEW 05: TRY ANYWHERE — GLOBAL NISAR GCOV AVAILABILITY FINDER
+       VIEW 05: GLOBAL FINDER — WORLDWIDE NISAR L2 GCOV OBSERVATORY
        ==================================================================== -->
   <section id="view-anywhere" class="view-section">
     <div class="page-container">
+      
+      <!-- Section Header -->
       <div class="section-heading-row">
         <div>
-          <span class="badge badge-cyan" style="margin-bottom:6px;">LIVE NASA ASF DAAC API INTEGRATION</span>
-          <h2 class="section-title">Try Anywhere on Earth — Live NISAR L2 GCOV Granule Finder</h2>
+          <h2 class="section-title">Global NISAR L2 GCOV Granule &amp; Swath Finder</h2>
           <p class="section-subtitle">
-            Query the live <strong>NASA Alaska Satellite Facility (ASF) Search API</strong> (<code>https://api.daac.asf.alaska.edu</code>) for calibrated NISAR L2 GCOV scenes over any region worldwide, or reproduce our pipeline on a new bounding box.
+            Query the live <strong>NASA Alaska Satellite Facility (ASF) Search API</strong> (<code>https://api.daac.asf.alaska.edu</code>) or explore precomputed calibrated catalogs across 9 global river deltas and wetland ecosystems.
           </p>
         </div>
       </div>
 
-      <div class="grid-2" style="margin-bottom:24px;">
-        <div class="surface-card">
+      <!-- Top Workspace: Left Dock & Right Map Stage -->
+      <div class="finder-workspace-grid">
+        
+        <!-- Left Dock: Search, Presets, BBox, Filters, Pipeline Code -->
+        <div class="surface-card finder-dock">
+          
+          <!-- 1. Global Location Search -->
+          <div class="dock-section">
+            <label class="dock-label" for="anywhere-search-input">Global Place Search</label>
+            <div class="search-input-group">
+              <input type="text" id="anywhere-search-input" class="select-input search-text-input" placeholder="Search city, delta, wetland, or river..." aria-label="Search location on Earth" />
+              <button id="btn-anywhere-search" class="btn btn-outline btn-icon" title="Search Location">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              </button>
+            </div>
+            <div id="anywhere-search-hint" class="search-status-hint">Enter any global place name to pan the map and calculate coordinates.</div>
+          </div>
+
+          <!-- 2. Benchmark Global Delta & Wetland Presets -->
+          <div class="dock-section">
+            <div class="dock-section-head">
+              <span class="dock-label">Benchmark Wetland Presets</span>
+              <span class="card-meta">9 Global AOIs</span>
+            </div>
+            <div class="preset-chip-grid">
+              <button class="landmark-chip anywhere-preset active" data-bbox="89.58,24.43,89.99,24.81" data-name="Jamuna Floodplain &amp; Chars (Bangladesh)">Jamuna Floodplain</button>
+              <button class="landmark-chip anywhere-preset" data-bbox="91.07,24.80,91.48,25.18" data-name="Sunamganj Haor Basin (Bangladesh)">Sunamganj Haor</button>
+              <button class="landmark-chip anywhere-preset" data-bbox="89.15,22.00,89.65,22.55" data-name="Sundarbans Mangrove Forest (Bangladesh)">Sundarbans Mangroves</button>
+              <button class="landmark-chip anywhere-preset" data-bbox="90.55,22.10,91.15,22.90" data-name="Meghna Tidal Estuary (Bhola, Bangladesh)">Meghna Estuary</button>
+              <button class="landmark-chip anywhere-preset" data-bbox="105.00,10.10,105.80,10.80" data-name="Mekong Delta (Vietnam)">Mekong Delta</button>
+              <button class="landmark-chip anywhere-preset" data-bbox="-60.50,-3.40,-59.60,-2.80" data-name="Amazon Floodplain (Manaus, Brazil)">Amazon Floodplain</button>
+              <button class="landmark-chip anywhere-preset" data-bbox="-90.40,29.10,-89.20,29.90" data-name="Mississippi River Delta (USA)">Mississippi Delta</button>
+              <button class="landmark-chip anywhere-preset" data-bbox="-57.00,-18.20,-55.80,-16.80" data-name="Pantanal Wetland Basin (Brazil)">Pantanal Wetlands</button>
+              <button class="landmark-chip anywhere-preset" data-bbox="22.20,-19.60,23.60,-18.60" data-name="Okavango Inland Delta (Botswana)">Okavango Delta</button>
+            </div>
+          </div>
+
+          <!-- 3. Target Bounding Box Coordinates -->
+          <div class="dock-section">
+            <div class="dock-section-head">
+              <span class="dock-label">Target Bounding Box (WGS84)</span>
+              <button id="btn-draw-aoi" class="btn btn-outline btn-xs" title="Click and drag on map to draw box">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" stroke-dasharray="3 3"/></svg>
+                <span>Draw on Map</span>
+              </button>
+            </div>
+            <div class="grid-4" style="gap:6px;margin-bottom:8px;">
+              <div>
+                <label class="coord-label" for="bbox-west">West Lon (°E)</label>
+                <input type="number" step="0.01" id="bbox-west" class="select-input coord-input" value="89.58" />
+              </div>
+              <div>
+                <label class="coord-label" for="bbox-south">South Lat (°N)</label>
+                <input type="number" step="0.01" id="bbox-south" class="select-input coord-input" value="24.43" />
+              </div>
+              <div>
+                <label class="coord-label" for="bbox-east">East Lon (°E)</label>
+                <input type="number" step="0.01" id="bbox-east" class="select-input coord-input" value="89.99" />
+              </div>
+              <div>
+                <label class="coord-label" for="bbox-north">North Lat (°N)</label>
+                <input type="number" step="0.01" id="bbox-north" class="select-input coord-input" value="24.81" />
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Satellite Orbit & Processing Filters -->
+          <div class="dock-section">
+            <div class="grid-3" style="gap:8px;margin-bottom:12px;">
+              <div>
+                <label class="coord-label" for="filter-flight-dir">Orbit Pass</label>
+                <select id="filter-flight-dir" class="select-input" style="width:100%;">
+                  <option value="ALL">All Passes</option>
+                  <option value="ASCENDING">Ascending (A)</option>
+                  <option value="DESCENDING">Descending (D)</option>
+                </select>
+              </div>
+              <div>
+                <label class="coord-label" for="filter-polarization">Polarization</label>
+                <select id="filter-polarization" class="select-input" style="width:100%;">
+                  <option value="ALL">All Polarizations</option>
+                  <option value="DH">Dual-Pol (HH+HV)</option>
+                  <option value="QP">Quad-Pol (Full)</option>
+                </select>
+              </div>
+              <div>
+                <label class="coord-label" for="filter-maturity">Calibration</label>
+                <select id="filter-maturity" class="select-input" style="width:100%;">
+                  <option value="ALL">All Products</option>
+                  <option value="PROVISIONAL">Provisional Calibrated</option>
+                  <option value="BETA">Beta Test</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Query Button -->
+            <button id="btn-query-asf" class="btn btn-nasa" style="width:100%;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <span>Query NASA ASF Search API</span>
+            </button>
+          </div>
+
+          <!-- 5. Reproducible Code Generator & Multi-Format Exporters -->
+          <div class="dock-section code-generator-section">
+            <div class="code-tab-row">
+              <button class="code-tab-btn active" data-tab="pipeline">Delta Pulse CLI</button>
+              <button class="code-tab-btn" data-tab="python">Python asf_search</button>
+              <button class="code-tab-btn" data-tab="curl">cURL Earthdata</button>
+              <button id="btn-copy-code" class="btn-copy-sm" title="Copy Code">Copy</button>
+            </div>
+            <pre id="cli-repro-cmd" class="code-snippet-box">python delta-pulse/pipeline/00_coverage.py --bbox 89.58 24.43 89.99 24.81</pre>
+            <div class="export-actions-row">
+              <button id="btn-export-geojson" class="btn btn-outline btn-xs">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span>Export GeoJSON Swaths</span>
+              </button>
+              <button id="btn-export-csv" class="btn btn-outline btn-xs">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                <span>Export CSV Manifest</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Map Stage: Basemap Switcher, Swaths, Interactive Map -->
+        <div class="surface-card finder-map-stage" style="padding:0;overflow:hidden;display:flex;flex-direction:column;">
+          
+          <!-- Map Toolbar -->
+          <div class="map-toolbar-row">
+            <div class="pill-group" style="margin-bottom:0;">
+              <button class="pill-btn active" id="btn-finder-base-carto" data-base="dark">Research Carto</button>
+              <button class="pill-btn" id="btn-finder-base-sat" data-base="sat">ESRI Optical</button>
+              <button class="pill-btn" id="btn-finder-base-osm" data-base="osm">Terrain Map</button>
+            </div>
+            <div class="map-toolbar-status">
+              <label class="swath-toggle-label">
+                <span>Swaths:</span>
+                <select id="select-swath-mode" class="select-input" style="padding:2px 6px;font-size:0.7rem;">
+                  <option value="selected" selected>Selected Swath Only</option>
+                  <option value="none">Target Box Only</option>
+                  <option value="all">All Outlines (Subtle)</option>
+                </select>
+              </label>
+              <span class="card-meta" id="asf-api-status">READY</span>
+            </div>
+          </div>
+
+          <!-- Leaflet Map Container -->
+          <div id="anywhere-map" style="width:100%;height:380px;min-height:340px;background:#f8fafc;"></div>
+
+          <!-- Live Observation Metrics Bar -->
+          <div class="finder-metrics-bar">
+            <div class="finder-metric-item">
+              <span class="finder-metric-val" id="finder-metric-granules">0</span>
+              <span class="finder-metric-lbl">Discovered Granules</span>
+            </div>
+            <div class="finder-metric-item">
+              <span class="finder-metric-val" id="finder-metric-tracks">0 Tracks</span>
+              <span class="finder-metric-lbl">Relative Orbit Tracks</span>
+            </div>
+            <div class="finder-metric-item">
+              <span class="finder-metric-val" id="finder-metric-dates">--</span>
+              <span class="finder-metric-lbl">Acquisition Time Range</span>
+            </div>
+            <div class="finder-metric-item">
+              <span class="finder-metric-val" id="finder-metric-pols">Dual-Pol HH/HV</span>
+              <span class="finder-metric-lbl">Radar Polarization Mode</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Results & Granule Scene Inspector Split -->
+      <div class="finder-bottom-layout">
+        
+        <!-- Table Column -->
+        <div class="surface-card finder-table-card">
           <div class="card-title-row">
-            <span class="card-title">1. Select Preset Region or Enter Bounding Box (WGS84)</span>
-            <span class="badge badge-gold" id="asf-api-status">READY</span>
+            <span class="card-title" id="anywhere-results-title">Discovered NISAR L2 GCOV Scenes</span>
+            <span class="card-meta" id="anywhere-count-badge">0 SCENES</span>
           </div>
-
-          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;">
-            <button class="landmark-chip anywhere-preset active" data-bbox="89.58,24.43,89.99,24.81" data-name="Jamuna Floodplain (Hero AOI 1)">Jamuna Floodplain (Hero AOI 1)</button>
-            <button class="landmark-chip anywhere-preset" data-bbox="91.07,24.80,91.48,25.18" data-name="Sunamganj Haor Basin (Hero AOI 2)">Sunamganj Haor (Hero AOI 2)</button>
-            <button class="landmark-chip anywhere-preset" data-bbox="89.02,21.75,89.85,22.45" data-name="Sundarbans Mangrove Forest">Sundarbans Mangroves</button>
-            <button class="landmark-chip anywhere-preset" data-bbox="90.55,22.10,91.15,22.90" data-name="Meghna Tidal Estuary (Bhola)">Meghna Estuary</button>
-            <button class="landmark-chip anywhere-preset" data-bbox="-60.50,-3.40,-59.60,-2.80" data-name="Amazon Floodplain (Manaus, Brazil)">Amazon Floodplain</button>
-            <button class="landmark-chip anywhere-preset" data-bbox="105.00,10.10,105.80,10.80" data-name="Mekong Delta (Vietnam)">Mekong Delta</button>
-          </div>
-
-          <div class="grid-4" style="margin-bottom:14px;">
-            <div>
-              <label style="font-size:0.68rem;color:var(--text-muted);">West Lon (°E)</label>
-              <input type="number" step="0.01" id="bbox-west" class="select-input" style="width:100%;" value="89.58" />
-            </div>
-            <div>
-              <label style="font-size:0.68rem;color:var(--text-muted);">South Lat (°N)</label>
-              <input type="number" step="0.01" id="bbox-south" class="select-input" style="width:100%;" value="24.43" />
-            </div>
-            <div>
-              <label style="font-size:0.68rem;color:var(--text-muted);">East Lon (°E)</label>
-              <input type="number" step="0.01" id="bbox-east" class="select-input" style="width:100%;" value="89.99" />
-            </div>
-            <div>
-              <label style="font-size:0.68rem;color:var(--text-muted);">North Lat (°N)</label>
-              <input type="number" step="0.01" id="bbox-north" class="select-input" style="width:100%;" value="24.81" />
-            </div>
-          </div>
-
-          <button id="btn-query-asf" class="btn btn-gold" style="width:100%;">
-            <span>🔍 Query NASA ASF Search API for NISAR L2 GCOV Granules</span>
-          </button>
-
-          <div style="margin-top:16px;background:var(--bg-deep);border:1px solid var(--border-subtle);border-radius:10px;padding:12px;">
-            <div style="font-size:0.72rem;font-weight:700;color:var(--cyan-400);margin-bottom:4px;">Reproducible CLI Command for This Bounding Box:</div>
-            <pre id="cli-repro-cmd" style="font-family:var(--font-mono);font-size:0.72rem;color:var(--gold-300);overflow-x:auto;white-space:pre-wrap;">python delta-pulse/pipeline/00_coverage.py --bbox 89.58 24.43 89.99 24.81</pre>
+          <div class="data-table-wrap" style="max-height:420px;overflow-y:auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Acquisition Date</th>
+                  <th>Granule Scene ID</th>
+                  <th>Orbit Track / Frame / Dir</th>
+                  <th>Polarization</th>
+                  <th>Maturity</th>
+                  <th>Size</th>
+                  <th>Earthdata Link</th>
+                </tr>
+              </thead>
+              <tbody id="anywhere-results-tbody"></tbody>
+            </table>
           </div>
         </div>
 
-        <div class="surface-card" style="padding:0;overflow:hidden;min-height:340px;">
-          <div id="anywhere-map" style="width:100%;height:100%;min-height:340px;"></div>
+        <!-- Scene Inspector Flyout / Side Card -->
+        <div class="surface-card finder-inspector-card" id="granule-inspector-card">
+          <div class="card-title-row">
+            <span class="card-title">Granule Scene Inspector</span>
+            <span class="card-meta" id="inspector-status-badge">SELECT A SCENE</span>
+          </div>
+          
+          <div id="inspector-placeholder" class="inspector-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-faint);margin-bottom:8px;"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <p>Click any scene in the table or click an orbit swath on the map to inspect telemetry, polarizations, and direct Earthdata Cloud H5 download links.</p>
+          </div>
+
+          <div id="inspector-details" class="inspector-details" style="display:none;">
+            <div class="inspector-granule-id" id="ins-granule-id">NISAR_L2_PR_GCOV_...</div>
+            
+            <div class="inspector-grid">
+              <div class="inspector-stat">
+                <span class="ins-label">Acquisition Date:</span>
+                <span class="ins-val" id="ins-date">--</span>
+              </div>
+              <div class="inspector-stat">
+                <span class="ins-label">Orbit Track &amp; Frame:</span>
+                <span class="ins-val" id="ins-track-frame">--</span>
+              </div>
+              <div class="inspector-stat">
+                <span class="ins-label">Flight Direction:</span>
+                <span class="ins-val" id="ins-direction">--</span>
+              </div>
+              <div class="inspector-stat">
+                <span class="ins-label">Polarization Channels:</span>
+                <span class="ins-val" id="ins-polarization">--</span>
+              </div>
+              <div class="inspector-stat">
+                <span class="ins-label">Calibration Maturity:</span>
+                <span class="ins-val" id="ins-maturity">--</span>
+              </div>
+              <div class="inspector-stat">
+                <span class="ins-label">Product File Size:</span>
+                <span class="ins-val" id="ins-size">--</span>
+              </div>
+            </div>
+
+            <div class="inspector-scattering-box">
+              <div class="ins-scat-title">Physical Scattering Applicability:</div>
+              <div class="ins-scat-desc" id="ins-scattering-desc">
+                Dual-polarization L-band (HH+HV) captures specular water mirroring in the HH channel and volumetric crop/forest canopy scattering in the HV channel.
+              </div>
+            </div>
+
+            <div class="inspector-browse-box" id="ins-browse-container" style="display:none;margin-bottom:12px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+                <span class="ins-label" style="font-weight:700;color:var(--nasa-blue);">Calibrated SAR Radar Preview</span>
+                <button id="btn-overlay-browse" class="btn btn-outline btn-xs">Overlay on Map</button>
+              </div>
+              <div style="width:100%;height:130px;background:#0f172a;border-radius:var(--radius-xs);overflow:hidden;display:flex;align-items:center;justify-content:center;border:1px solid var(--border-subtle);">
+                <img id="ins-browse-img" src="" alt="NISAR Radar Quicklook" style="max-width:100%;max-height:100%;object-fit:contain;" />
+              </div>
+            </div>
+
+            <div class="inspector-links-row">
+              <a href="#" id="ins-download-link" target="_blank" rel="noopener" class="btn btn-nasa btn-sm" style="flex:1;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span>Download HDF5 (.h5)</span>
+              </a>
+              <button id="btn-highlight-swath" class="btn btn-outline btn-sm">
+                <span>Zoom Swath</span>
+              </button>
+            </div>
+
+            <button id="btn-ins-open-explorer" class="btn btn-nasa btn-sm" style="display:none;width:100%;margin-top:6px;">
+              <span>Open in Radar Explorer →</span>
+            </button>
+            
+            <div class="inspector-s3-path">
+              <span class="ins-s3-lbl">Direct S3 Cloud URI:</span>
+              <code id="ins-s3-uri" class="ins-s3-code">s3://nisar-l2-gcov-provisional/...</code>
+            </div>
+          </div>
+
         </div>
+
       </div>
 
-      <div class="surface-card">
-        <div class="card-title-row">
-          <span class="card-title" id="anywhere-results-title">Discovered NISAR L2 GCOV Scenes</span>
-          <span class="badge badge-emerald" id="anywhere-count-badge">0 SCENES</span>
-        </div>
-        <div class="data-table-wrap" style="max-height:340px;overflow-y:auto;">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>Acquisition Date</th>
-                <th>Granule ID</th>
-                <th>Track / Frame / Dir</th>
-                <th>Maturity Phase</th>
-                <th>Size (MB)</th>
-                <th>ASF Download Link</th>
-              </tr>
-            </thead>
-            <tbody id="anywhere-results-tbody"></tbody>
-          </table>
-        </div>
-      </div>
     </div>
   </section>
 
