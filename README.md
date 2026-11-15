@@ -105,6 +105,91 @@ A critical data hygiene rule in our pipeline is **never mixing pre-calibration `
 
 ## 4. Processing Pipeline & Scientific Methodology
 
+### 4.1 End-to-End System Architecture
+
+```mermaid
+flowchart TD
+
+subgraph group_discovery["Coverage and Data"]
+    node_coverage["AOI Coverage"]
+    node_nisar["NISAR Fetch"]
+    node_ancillary["Ancillary Fetch"]
+end
+
+subgraph group_analysis["Radar Analysis"]
+    node_preprocess["SAR Preprocess"]
+    node_water["Water Pulse"]
+    node_paddy["Paddy Rhythm"]
+end
+
+subgraph group_assessment["Impact and Validation"]
+    node_impact["Human Impact"]
+    node_validation["Cross-Sensor Validation"]
+end
+
+subgraph group_experience["Web Experience"]
+    node_export["Web Export"]
+    node_webdata["Web Results"]
+    node_app["Interactive Observatory"]
+    node_maps["Map Overlays"]
+end
+
+node_user(("User"))
+node_external(("Satellite Data Services"))
+
+node_coverage -->|"queries"| node_external
+node_coverage -->|"catalogs scenes"| node_nisar
+node_nisar -->|"downloads scenes"| node_external
+node_ancillary -->|"downloads layers"| node_external
+node_nisar -->|"provides raw cubes"| node_preprocess
+node_preprocess -->|"provides radar series"| node_water
+node_preprocess -->|"provides radar series"| node_paddy
+node_ancillary -.->|"provides baselines"| node_water
+node_water -->|"provides flood masks"| node_impact
+node_ancillary -->|"provides exposure layers"| node_impact
+node_water -->|"provides NISAR masks"| node_validation
+node_ancillary -.->|"provides comparison data"| node_validation
+node_water -.->|"exports water maps"| node_export
+node_paddy -.->|"exports crop maps"| node_export
+node_impact -.->|"exports impact results"| node_export
+node_validation -->|"writes metrics"| node_webdata
+node_export -->|"writes manifests"| node_webdata
+node_export -->|"renders overlays"| node_maps
+node_user -->|"explores"| node_app
+node_app -.->|"presents results"| node_webdata
+node_app -->|"displays overlays"| node_maps
+node_app -.->|"sonifies change"| node_user
+
+click node_coverage "https://github.com/rishat8903/nasa-space-apps-delta-pulse/blob/main/delta-pulse/pipeline/00_coverage.py"
+click node_nisar "https://github.com/rishat8903/nasa-space-apps-delta-pulse/blob/main/delta-pulse/pipeline/01_fetch.py"
+click node_ancillary "https://github.com/rishat8903/nasa-space-apps-delta-pulse/blob/main/delta-pulse/pipeline/01b_fetch_ancillary.py"
+click node_preprocess "https://github.com/rishat8903/nasa-space-apps-delta-pulse/blob/main/delta-pulse/pipeline/02_preprocess.py"
+click node_water "https://github.com/rishat8903/nasa-space-apps-delta-pulse/blob/main/delta-pulse/pipeline/03_water.py"
+click node_paddy "https://github.com/rishat8903/nasa-space-apps-delta-pulse/blob/main/delta-pulse/pipeline/04_paddy.py"
+click node_impact "https://github.com/rishat8903/nasa-space-apps-delta-pulse/blob/main/delta-pulse/pipeline/05_impact.py"
+click node_validation "https://github.com/rishat8903/nasa-space-apps-delta-pulse/blob/main/delta-pulse/pipeline/06_validate.py"
+click node_export "https://github.com/rishat8903/nasa-space-apps-delta-pulse/blob/main/delta-pulse/pipeline/07_export_web.py"
+click node_webdata "https://github.com/rishat8903/nasa-space-apps-delta-pulse/tree/main/delta-pulse/web/data"
+click node_app "https://github.com/rishat8903/nasa-space-apps-delta-pulse/blob/main/delta-pulse/web/src/app.js"
+click node_maps "https://github.com/rishat8903/nasa-space-apps-delta-pulse/tree/main/delta-pulse/web/images/overlays"
+
+classDef toneNeutral fill:#f8fafc,stroke:#334155,stroke-width:1.5px,color:#0f172a
+classDef toneBlue fill:#dbeafe,stroke:#2563eb,stroke-width:1.5px,color:#172554
+classDef toneAmber fill:#fef3c7,stroke:#d97706,stroke-width:1.5px,color:#78350f
+classDef toneMint fill:#dcfce7,stroke:#16a34a,stroke-width:1.5px,color:#14532d
+classDef toneRose fill:#ffe4e6,stroke:#e11d48,stroke-width:1.5px,color:#881337
+classDef toneIndigo fill:#e0e7ff,stroke:#4f46e5,stroke-width:1.5px,color:#312e81
+classDef toneTeal fill:#ccfbf1,stroke:#0f766e,stroke-width:1.5px,color:#134e4a
+
+class node_coverage,node_nisar,node_ancillary,node_user toneBlue
+class node_preprocess,node_water,node_paddy toneAmber
+class node_impact,node_validation toneMint
+class node_export,node_webdata,node_app,node_maps toneRose
+class node_external toneIndigo
+```
+
+### 4.2 Pipeline Execution Flow
+
 The processing workflow is organized into modular Python scripts inside [`delta-pulse/pipeline/`](delta-pulse/pipeline/):
 
 ```mermaid
@@ -120,7 +205,7 @@ flowchart LR
     S6 --> S7
 ```
 
-### Stage 0 & 1: Cloud-Optimized HDF5 Streaming & Radiometric Calibration (`00_coverage.py` – `02_preprocess.py`)
+### 4.3 Stage 0 & 1: Cloud-Optimized HDF5 Streaming & Radiometric Calibration (`00_coverage.py` – `02_preprocess.py`)
 - **HTTP Range-Request Chunk Streaming:** Full NISAR L2 GCOV HDF5 granules are `~2.15 GB` each. Instead of downloading `50+ GB` of raw files, `01_fetch.py` authenticates with NASA Earthdata (`earthaccess`), resolves pre-signed CloudFront URLs, and uses `fsspec` (`block_size=262144`) + `h5py` to stream only the exact `(512, 512)` internal HDF5 chunks (`40.96 km × 40.96 km`) from `/science/LSAR/GCOV/grids/frequencyB/{HHHH, HVHV, mask, numberOfLooks}` in ~15 seconds per pass.
 - **Masking, Speckle Filtering & Decibel Conversion:** Invalid pixels (`mask == 0`, `mask == 255`, radar shadow/layover, or $\gamma^0 \le 0$) are masked to `NaN`. A local variance-preserving $3\times 3$ **Lee speckle filter** is applied in linear power space before converting to decibels:
   $$\gamma^0_{\text{dB}} = 10 \cdot \log_{10}\!\left(\max\left(\gamma^0_{\text{linear}},\, 10^{-5}\right)\right)$$
@@ -130,7 +215,7 @@ flowchart LR
 | :---: | :---: |
 | ![Jamuna Radiometric Calibration & Histograms](docs/qa/jamuna_qa_histograms_and_drift.png) | ![Haor Radiometric Calibration & Histograms](docs/qa/haor_qa_histograms_and_drift.png) |
 
-### Stage 2: Water Pulse, Flooded Vegetation & Braided River Transects (`03_water.py`)
+### 4.4 Stage 2: Water Pulse, Flooded Vegetation & Braided River Transects (`03_water.py`)
 - **JRC-Seeded Bimodal Otsu Thresholding:** Computing a global Otsu threshold over an entire scene can fail when water occupies a small fraction of the frame. We construct a balanced 50/50 histogram per date by sampling verified permanent water (`JRC occurrence >= 80%`) against upland non-water (`JRC < 5%`) and combine cross-pol and co-pol criteria (`HV <= min(Otsu_HV, -16.5 dB)` and `HH <= -13.0 dB`, or very dark `HH <= -15.2 dB` with `HV <= -19.5 dB`), followed by morphological opening/closing to suppress speckle noise.
 - **4-State Flood Dynamics Classification:**
   1. `Class 1 — Permanent Water`: Inundated in NISAR and `JRC occurrence >= 50%` (or wet in $\ge 80\%$ of NISAR passes).
@@ -143,7 +228,7 @@ flowchart LR
 | :---: | :---: |
 | ![Jamuna Water & Multi-Sensor Validation](docs/qa/jamuna_water_validation.png) | ![Haor Water & Multi-Sensor Validation](docs/qa/haor_water_validation.png) |
 
-### Stage 3: Unsupervised Paddy Phenology Clustering (`04_paddy.py`)
+### 4.5 Stage 3: Unsupervised Paddy Phenology Clustering (`04_paddy.py`)
 - **Strict Cropland Masking:** Non-agricultural land is excluded upfront using real **ESA WorldCover 10m (`Class 40 == Cropland`)** (`142,852` pixels = `914.3 km²` in Jamuna; `128,487` pixels = `822.3 km²` in Haor) and excluding permanent rivers (`JRC >= 50%`).
 - **Multi-Temporal Feature Extraction & Clustering:** Each cropland pixel is represented by a 36-dimensional standardized trajectory (`12 dates × [HH_dB, HV_dB, HV-HH_dB]`) and grouped via $K=4$ K-means clustering (`n_init=15, random_state=42`), ordered from highest to lowest dynamic HV volume-scattering range ($\Delta\text{HV}$).
 
@@ -151,7 +236,7 @@ flowchart LR
 | :---: | :---: |
 | ![Jamuna Paddy Phenology Diagnostics](docs/qa/jamuna_paddy_diagnostics.png) | ![Haor Paddy Phenology Diagnostics](docs/qa/haor_paddy_diagnostics.png) |
 
-### Stage 4 & 5: Socio-Economic Exposure & Multi-Sensor Cross-Validation (`05_impact.py` & `06_validate.py`)
+### 4.6 Stage 4 & 5: Socio-Economic Exposure & Multi-Sensor Cross-Validation (`05_impact.py` & `06_validate.py`)
 - **Uncertainty-Aware Zonal Exposure:** New seasonal flood + flooded vegetation masks (`Classes 2 & 4`, explicitly excluding permanent rivers so river channels are never miscounted as flooded homes) are intersected with sum-conserving `80 m` **WorldPop UN-adjusted counts** (`±15%` uncertainty range) and **ESA WorldCover Cropland (`Class 40`)**, then aggregated by official **geoBoundaries Upazilas (`ADM3`) and Districts (`ADM2`)**.
 - **Independent Multi-Sensor Validation:** NISAR water masks are evaluated pixel-by-pixel (`N = 262,144` pixels per AOI) against temporally co-located **Sentinel-1 C-band RTC (`2026-07-25`)** and cloud-free **Sentinel-2 L2A Optical NDWI (`2026-11-09` / `2026-11-13`)**.
 
