@@ -20,7 +20,7 @@ By combining a 12-pass calibrated NISAR time series (`June 18 – November 9, 20
 
 1. [Physical Motivation: Why L-Band SAR in the Monsoon?](#1-physical-motivation-why-l-band-sar-in-the-monsoon)
 2. [Study Areas (AOIs)](#2-study-areas-aois)
-3. [Datasets & Provenance (`delta-pulse/datasets/`)](#3-datasets--provenance-delta-pulsedatasets)
+3. [Datasets & Provenance](#3-datasets--provenance)
 4. [Processing Pipeline & Scientific Methodology](#4-processing-pipeline--scientific-methodology)
 5. [Quantitative Findings & Multi-Sensor Validation](#5-quantitative-findings--multi-sensor-validation)
 6. [Web Application & "Change Radio" Sonification](#6-web-application--change-radio-sonification)
@@ -61,9 +61,9 @@ Both study areas are extracted from the exact same orbital geometry—**Track 06
 
 ---
 
-## 3. Datasets & Provenance (`delta-pulse/datasets/`)
+## 3. Datasets & Provenance
 
-All seven datasets used in Delta Pulse (25 files totaling `~232 MB`) are stored locally in [`delta-pulse/datasets/`](datasets/) and co-registered to the exact `80 m` `EPSG:32646` (`512 × 512`) NISAR grid. No synthetic or placeholder grids are used anywhere in the repository.
+All seven datasets used in Delta Pulse (25 files totaling `~232 MB`) are organized in [`delta-pulse/datasets/`](delta-pulse/datasets/) and co-registered to the exact `80 m` `EPSG:32646` (`512 × 512`) NISAR grid. No synthetic or placeholder grids are used anywhere in the project. (The web application runs immediately out of the box using bundled pre-computed overlays and analytical JSONs; full NetCDF/GeoTIFF source cubes can be reproduced or extended locally using the pipeline scripts as documented in Section 8).
 
 ### 3.1 Complete Multi-Sensor Dataset Inventory
 
@@ -105,7 +105,7 @@ A critical data hygiene rule in our pipeline is **never mixing pre-calibration `
 
 ## 4. Processing Pipeline & Scientific Methodology
 
-The processing workflow is organized into seven modular Python scripts inside [`delta-pulse/pipeline/`](pipeline/):
+The processing workflow is organized into modular Python scripts inside [`delta-pulse/pipeline/`](delta-pulse/pipeline/):
 
 ```mermaid
 flowchart LR
@@ -126,8 +126,9 @@ flowchart LR
   $$\gamma^0_{\text{dB}} = 10 \cdot \log_{10}\!\left(\max\left(\gamma^0_{\text{linear}},\, 10^{-5}\right)\right)$$
 - **Stable Target Calibration Verification:** Across persistent built-up settlement pixels (`ESA WorldCover == 50` and high mean `HH`), temporal standard deviation across all 12 passes is **$\sigma(\gamma^0_{HH}) = 0.211\text{ dB}$** (`HV: 0.128 dB`) in Jamuna and **$0.233\text{ dB}$** (`HV: 0.254 dB`) in Haor—confirming radiometric stability well within `< 0.5 dB` without artificial scene-to-scene shifting.
 
-![Jamuna Radiometric Calibration & Histograms](docs/qa/jamuna_qa_histograms_and_drift.png)
-![Haor Radiometric Calibration & Histograms](docs/qa/haor_qa_histograms_and_drift.png)
+| Jamuna Floodplain & Chars | Sunamganj & Sylhet Haor Basin |
+| :---: | :---: |
+| ![Jamuna Radiometric Calibration & Histograms](docs/qa/jamuna_qa_histograms_and_drift.png) | ![Haor Radiometric Calibration & Histograms](docs/qa/haor_qa_histograms_and_drift.png) |
 
 ### Stage 2: Water Pulse, Flooded Vegetation & Braided River Transects (`03_water.py`)
 - **JRC-Seeded Bimodal Otsu Thresholding:** Computing a global Otsu threshold over an entire scene can fail when water occupies a small fraction of the frame. We construct a balanced 50/50 histogram per date by sampling verified permanent water (`JRC occurrence >= 80%`) against upland non-water (`JRC < 5%`) and combine cross-pol and co-pol criteria (`HV <= min(Otsu_HV, -16.5 dB)` and `HH <= -13.0 dB`, or very dark `HH <= -15.2 dB` with `HV <= -19.5 dB`), followed by morphological opening/closing to suppress speckle noise.
@@ -138,15 +139,17 @@ flowchart LR
   4. `Class 4 — Flooded Vegetation (L-Band Double-Bounce)`: Non-open-water wetland/cropland pixels exhibiting a strong co-polarized dihedral surge ($\gamma^0_{HH} > -7.5\text{ dB}$, $\Delta\text{HH} > +1.5\text{ dB}$ over dry baseline, and $\text{HH} - \text{HV} > 6.5\text{ dB}$).
 - **Braided River Width Transects (`T1–T3`):** Across the Jamuna braided belt, three fixed latitudinal transects measure wet channel width from early monsoon (`June 18`) to peak flood (`July 24`) and post-monsoon recession (`November 9`), quantifying up to **`11.92 km`** of peak wetted width and **`7.44 km`** of newly emergent char sandbars on the Northern Reach (`Kazipur / Sariakandi`).
 
-![Jamuna Water & Multi-Sensor Validation](docs/qa/jamuna_water_validation.png)
-![Haor Water & Multi-Sensor Validation](docs/qa/haor_water_validation.png)
+| Jamuna Floodplain & Chars | Sunamganj & Sylhet Haor Basin |
+| :---: | :---: |
+| ![Jamuna Water & Multi-Sensor Validation](docs/qa/jamuna_water_validation.png) | ![Haor Water & Multi-Sensor Validation](docs/qa/haor_water_validation.png) |
 
 ### Stage 3: Unsupervised Paddy Phenology Clustering (`04_paddy.py`)
 - **Strict Cropland Masking:** Non-agricultural land is excluded upfront using real **ESA WorldCover 10m (`Class 40 == Cropland`)** (`142,852` pixels = `914.3 km²` in Jamuna; `128,487` pixels = `822.3 km²` in Haor) and excluding permanent rivers (`JRC >= 50%`).
 - **Multi-Temporal Feature Extraction & Clustering:** Each cropland pixel is represented by a 36-dimensional standardized trajectory (`12 dates × [HH_dB, HV_dB, HV-HH_dB]`) and grouped via $K=4$ K-means clustering (`n_init=15, random_state=42`), ordered from highest to lowest dynamic HV volume-scattering range ($\Delta\text{HV}$).
 
-![Jamuna Paddy Phenology Diagnostics](docs/qa/jamuna_paddy_diagnostics.png)
-![Haor Paddy Phenology Diagnostics](docs/qa/haor_paddy_diagnostics.png)
+| Jamuna Floodplain & Chars | Sunamganj & Sylhet Haor Basin |
+| :---: | :---: |
+| ![Jamuna Paddy Phenology Diagnostics](docs/qa/jamuna_paddy_diagnostics.png) | ![Haor Paddy Phenology Diagnostics](docs/qa/haor_paddy_diagnostics.png) |
 
 ### Stage 4 & 5: Socio-Economic Exposure & Multi-Sensor Cross-Validation (`05_impact.py` & `06_validate.py`)
 - **Uncertainty-Aware Zonal Exposure:** New seasonal flood + flooded vegetation masks (`Classes 2 & 4`, explicitly excluding permanent rivers so river channels are never miscounted as flooded homes) are intersected with sum-conserving `80 m` **WorldPop UN-adjusted counts** (`±15%` uncertainty range) and **ESA WorldCover Cropland (`Class 40`)**, then aggregated by official **geoBoundaries Upazilas (`ADM3`) and Districts (`ADM2`)**.
@@ -185,59 +188,63 @@ flowchart LR
 
 ## 6. Web Application & "Change Radio" Sonification
 
-The frontend inside [`delta-pulse/web/`](web/) is a lightweight, zero-build static web application (`HTML5`, custom CSS Grid/Flexbox design system in [`web/src/style.css`](web/src/style.css), `Leaflet.js`, `Chart.js`, and the browser `Web Audio API` in [`web/src/app.js`](web/src/app.js)) organized into five interactive views:
+The frontend inside [`delta-pulse/web/`](delta-pulse/web/) is a lightweight, zero-build static web application (`HTML5`, modern NASA Research White design system conforming to NASA-STD-3001 in [`delta-pulse/web/src/style.css`](delta-pulse/web/src/style.css), `Leaflet.js`, `Chart.js`, and the browser `Web Audio API` in [`delta-pulse/web/src/app.js`](delta-pulse/web/src/app.js)) organized into five interactive views:
 
-1. **`01 Story Arc`**: Interactive 5-act monsoon narrative where clicking any act configures the Radar Explorer to that exact date, thematic layer, and verified geographic pin, alongside visual cards explaining L-band scattering physics.
+1. **`01 Overview`**: Interactive 5-act monsoon narrative where clicking any act configures the Radar Explorer to that exact date, thematic layer, and verified geographic pin, alongside visual cards explaining L-band scattering physics.
 2. **`02 Radar Explorer`**: Three-column Mission Control workspace featuring:
    - **12-Pass Time Slider & Playback Controls** (`2026-06-18` to `2026-11-09`).
    - **8 Real Geospatial Layers**: `NISAR Dual-Pol SAR RGB`, `Water & Flood Dynamics`, `Water Recurrence Frequency %`, `Paddy Rhythm Clusters (K=4)`, `ESA WorldCover 10m`, `WorldPop 100m Density`, `Sentinel-1 C-Band RTC (Jul 25)`, and `Sentinel-2 L2A Optical + NDWI (Nov)`.
    - **Before / After Split-Screen Swipe**: Compare any two NISAR acquisition dates side-by-side on the map with an interactive split divider.
    - **6 Verified Delta Landmarks + 1,024-Point Interactive Click Grid**: Inspect the 12-pass $\gamma^0_{HH}$, $\gamma^0_{HV}$, and $\text{HV}-\text{HH}$ time series at any location on the map.
    - **Change Radio (Web Audio API Sonification)**: Converts the 12-pass radar time series at the selected location into sound—mapping $\gamma^0_{HV}$ (`-25 to -10 dB`) onto a 10-note C-major pentatonic scale (`G3 = 196 Hz` to `E5 = 659.25 Hz`), modulating low-pass filter brightness via `HH - HV`, and triggering a deep `65.41 Hz` (`C2`) sub-bass pulse whenever a pixel floods, accompanied by live accessible text captions.
-3. **`03 Paddy Rhythm`**: Displays the four unsupervised cropland clusters, their area statistics (`km²`, `ha`, `% of WorldCover Cropland`), dual centroid trajectory charts (`HV` and `HH`), and physical interpretation.
+3. **`03 Paddy Phenology`**: Displays the four unsupervised cropland clusters, their area statistics (`km²`, `ha`, `% of WorldCover Cropland`), dual centroid trajectory charts (`HV` and `HH`), and physical interpretation.
 4. **`04 Impact & Validation`**: Displays the 12-pass Flood vs. Exposed Population dual-axis chart, the ranked Upazila (`ADM3`) and District (`ADM2`) exposure table, and the Stage 5 Sentinel-1 & Sentinel-2 validation cards with one-click buttons to inspect the validation layers on the map.
-5. **`05 Try Anywhere`**: Queries the live **NASA ASF Search API** (`https://api.daac.asf.alaska.edu/services/search/param`) for available NISAR L2 GCOV granules over any bounding box on Earth (with presets for the Jamuna, Sunamganj Haor, Sundarbans, Meghna Estuary, Amazon Floodplain, and Mekong Delta) and generates the exact CLI command to run our pipeline on that region.
+5. **`05 Global Finder`**: Queries the live **NASA ASF Search API** (`https://api.daac.asf.alaska.edu/services/search/param`) for available NISAR L2 GCOV granules over any bounding box on Earth (with presets for the Jamuna, Sunamganj Haor, Sundarbans, Meghna Estuary, Amazon Floodplain, and Mekong Delta) and generates the exact CLI command to run our pipeline on that region.
 
 ---
 
 ## 7. Repository Structure
 
 ```text
-delta-pulse/
-├── datasets/                        # All 7 real satellite & GIS datasets (~232 MB, 25 files)
-│   ├── nisar_gcov/                  # 12-pass NISAR L2 GCOV NetCDF cubes & metadata CSVs
-│   ├── sentinel1_rtc/               # Real Sentinel-1 C-band RTC (2026-07-25) 80m GeoTIFFs
-│   ├── sentinel2_optical/           # Real Sentinel-2 L2A optical + NDWI/MNDWI 80m GeoTIFFs
-│   ├── jrc_water/                   # EC JRC Global Surface Water v1.4 occurrence 80m GeoTIFFs
-│   ├── worldcover/                  # ESA WorldCover 10m v200 land cover 80m GeoTIFFs
-│   ├── worldpop/                    # WorldPop 100m UN-adjusted BGD raster & 80m AOI grids
-│   └── admin_boundaries/            # geoBoundaries BGD ADM2/ADM3 GeoJSONs & 80m Upazila grids
-├── data_raw/                        # Intermediate processed NetCDF cubes (_processed, _water, _paddy)
-├── docs/                            # Technical documentation & generated QA figures
-│   ├── qa/                          # Calibration, water validation, and paddy diagnostic PNGs
-│   ├── aoi_decision.md              # Stage 0 ASF coverage analysis & track selection report
-│   ├── data_sources.md              # Detailed dataset provenance & granule inventory
-│   ├── methods.md                   # Mathematical formulation of Stages 1–5
-│   └── validation_report.md         # Stage 5 confusion matrix report
-├── pipeline/                        # Modular, reproducible Python 3.12 scientific pipeline
-│   ├── 00_coverage.py               # Queries live NASA ASF API for NISAR GCOV coverage
-│   ├── 01_fetch.py                  # Streams 512x512 NISAR GCOV chunks via HTTP range requests
-│   ├── 01b_fetch_ancillary.py       # Downloads & warps JRC, WorldCover, WorldPop, ADM3, S1, S2
-│   ├── 02_preprocess.py             # 3x3 Lee filter, linear-to-dB conversion & calibration QA
-│   ├── 03_water.py                  # JRC-Otsu water masks, double-bounce veg & river transects
-│   ├── 04_paddy.py                  # Unsupervised K=4 crop phenology on WorldCover Class 40
-│   ├── 05_impact.py                 # WorldPop & Upazila/District exposure with ±15% bounds
-│   ├── 06_validate.py               # Pixel-wise cross-validation vs Sentinel-1 & Sentinel-2
-│   └── 07_export_web.py             # Exports 60 RGBA PNG overlays & JSON manifests for web app
-├── web/                             # Static web application (zero build step required)
-│   ├── index.html                   # 5-view Mission Control interface
-│   ├── src/
-│   │   ├── style.css                # Self-contained dark ocean-blue & gold CSS design system
-│   │   └── app.js                   # Leaflet map, Chart.js, split-swipe & Web Audio controller
-│   ├── data/                        # Exported JSON manifests, time series & validation metrics
-│   └── images/
-│       ├── overlays/                # 60 RGBA PNG map overlays (jamuna/ and haor/)
-│       └── qa/                      # QA calibration & cube overview figures
+nasa-space-apps-Delta-Pulse/
+├── docs/                            # Root QA figures rendered directly on GitHub
+│   └── qa/                          # Radiometric QA, water validation & crop diagnostics
+├── delta-pulse/
+│   ├── datasets/                    # Multi-sensor satellite & GIS source directory
+│   │   ├── nisar_gcov/              # 12-pass NISAR L2 GCOV NetCDF cubes & metadata CSVs
+│   │   ├── sentinel1_rtc/           # Real Sentinel-1 C-band RTC (2026-07-25) 80m GeoTIFFs
+│   │   ├── sentinel2_optical/       # Real Sentinel-2 L2A optical + NDWI 80m GeoTIFFs
+│   │   ├── jrc_water/               # EC JRC Global Surface Water v1.4 occurrence 80m GeoTIFFs
+│   │   ├── worldcover/              # ESA WorldCover 10m v200 land cover 80m GeoTIFFs
+│   │   ├── worldpop/                # WorldPop 100m UN-adjusted BGD raster & 80m AOI grids
+│   │   └── admin_boundaries/        # geoBoundaries BGD ADM2/ADM3 GeoJSONs & 80m Upazila grids
+│   ├── data_raw/                    # Intermediate processed NetCDF cubes (_processed, _water, _paddy)
+│   ├── docs/                        # Scientific documentation & mirrored QA figures
+│   │   ├── qa/                      # Calibration, water validation & crop diagnostics
+│   │   ├── aoi_decision.md          # Stage 0 ASF coverage analysis & track selection report
+│   │   ├── data_sources.md          # Detailed dataset provenance & granule inventory
+│   │   ├── methods.md               # Mathematical formulation of Stages 1–5
+│   │   └── validation_report.md     # Stage 5 confusion matrix report
+│   ├── pipeline/                    # Modular, reproducible Python 3.12 scientific pipeline
+│   │   ├── 00_coverage.py           # Queries live NASA ASF API for NISAR GCOV coverage
+│   │   ├── 01_fetch.py              # Streams 512x512 NISAR GCOV chunks via HTTP range requests
+│   │   ├── 01b_fetch_ancillary.py   # Downloads & warps JRC, WorldCover, WorldPop, ADM3, S1, S2
+│   │   ├── 02_preprocess.py         # 3x3 Lee filter, linear-to-dB conversion & calibration QA
+│   │   ├── 03_water.py              # JRC-Otsu water masks, double-bounce veg & river transects
+│   │   ├── 04_paddy.py              # Unsupervised K=4 crop phenology on WorldCover Class 40
+│   │   ├── 05_impact.py             # WorldPop & Upazila/District exposure with ±15% bounds
+│   │   ├── 06_validate.py           # Pixel-wise cross-validation vs Sentinel-1 & Sentinel-2
+│   │   ├── 07_export_web.py         # Exports 60 RGBA PNG overlays & JSON manifests for web app
+│   │   └── generate_readme_qa_figures.py # Automated generator for publication QA figures
+│   └── web/                         # Static web application (zero build step required)
+│       ├── index.html               # 5-view Mission Control interface
+│       ├── src/
+│       │   ├── style.css            # NASA Research White design system (clean, high-contrast)
+│       │   └── app.js               # Leaflet map, Chart.js, split-swipe & Web Audio controller
+│       ├── data/                    # Exported JSON manifests, time series & validation metrics
+│       └── images/
+│           ├── overlays/            # 60 RGBA PNG map overlays (jamuna/ and haor/)
+│           └── qa/                  # QA calibration & diagnostic figures
 ├── .env.example                     # Template for NASA Earthdata credentials
 ├── environment.yml                  # Conda / Python 3.12 environment specification
 ├── run_app.sh                       # One-command launcher for Git Bash / macOS / Linux
@@ -252,25 +259,27 @@ delta-pulse/
 
 ### 8.1 Launching the Web Application Immediately
 
-All datasets, processed NetCDF cubes, 60 RGBA PNG map overlays, and JSON manifests are already pre-computed and included in the repository. You can launch the web application immediately without re-downloading any data:
+All processed NetCDF analytical layers, 60 RGBA PNG map overlays, and JSON manifests are bundled directly in the repository. You can launch the web application immediately without re-downloading any data:
 
 **Using Git Bash (VS Code on Windows, macOS, or Linux):**
 ```bash
-# From the workspace root:
+# From the repository root:
 ./run_app.sh
 
-# Or run the Python HTTP server directly:
-./.venv/Scripts/python.exe -m http.server 8080 --directory delta-pulse/web
+# Or directly using Python:
+python -m http.server 8080 --directory delta-pulse/web
 ```
 
 **Using Windows PowerShell or Command Prompt:**
 ```powershell
+# From the repository root:
 .\run_app.bat
-# Or directly:
-.\.venv\Scripts\python.exe -m http.server 8080 --directory delta-pulse/web
+
+# Or directly using Python:
+python -m http.server 8080 --directory delta-pulse/web
 ```
 
-Then open **`http://localhost:8080/`** in your browser.
+Then open **`http://localhost:8080/`** (or `http://localhost:8085/` if port 8080 is already occupied) in your browser.
 
 ---
 
