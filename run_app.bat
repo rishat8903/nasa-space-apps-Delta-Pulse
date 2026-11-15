@@ -3,10 +3,17 @@ echo ========================================================
 echo Starting Delta Pulse Web Server (NASA Space Apps 2026)
 echo ========================================================
 echo.
-echo Opening http://localhost:8080/ in your browser...
-start http://localhost:8080/
+
+set PORT=8085
+echo Opening http://localhost:%PORT%/ in your browser...
+start http://localhost:%PORT%/
 echo.
-echo Server running. Press Ctrl+C in this terminal to stop.
+echo Server running on port %PORT%. Press Ctrl+C in this terminal to stop.
 echo.
-.\.venv\Scripts\python.exe -m http.server 8080 --directory delta-pulse/web
+
+if exist ".\.venv\Scripts\python.exe" (
+    .\.venv\Scripts\python.exe -m http.server %PORT% --directory delta-pulse/web
+) else (
+    python -m http.server %PORT% --directory delta-pulse/web
+)
 pause
